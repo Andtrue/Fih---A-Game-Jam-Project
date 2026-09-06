@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FishData" format=3 uid="uid://cvn6kepvy8vto"]
+
+[ext_resource type="Script" uid="uid://bxmupg1c30hsa" path="res://Data/fish_data.gd" id="1_lqfcy"]
+
+[resource]
+script = ExtResource("1_lqfcy")
+fish_name = "Pike"
+difficulty = 65.0
+min_cast_distance = 60.0
+catch_weight = 10.0
+sell_value = 120
+metadata/_custom_type_script = "uid://bxmupg1c30hsa"

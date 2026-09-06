@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FishData" format=3 uid="uid://blf1oq2ucpsnv"]
+
+[ext_resource type="Script" uid="uid://bxmupg1c30hsa" path="res://Data/fish_data.gd" id="1_w44wi"]
+
+[resource]
+script = ExtResource("1_w44wi")
+fish_name = "Minnow"
+difficulty = 15.0
+catch_weight = 60.0
+sell_value = 10
+metadata/_custom_type_script = "uid://bxmupg1c30hsa"
