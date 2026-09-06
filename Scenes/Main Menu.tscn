@@ -6,7 +6,7 @@
 [node name="MainMenu" type="Node2D" unique_id=184303805]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=433568977]
-position = Vector2(642, 325.75)
+position = Vector2(637.0001, 325)
 scale = Vector2(0.91810346, 0.79620564)
 texture = ExtResource("1_aire5")
 
