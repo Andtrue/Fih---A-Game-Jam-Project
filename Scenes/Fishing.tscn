@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://clhn0beqe0u14"]
+
+[node name="Fishing" type="Node2D" unique_id=1829919186]
+
+[node name="Button" type="Button" parent="." unique_id=1147711506]
+offset_left = -16.0
+offset_top = -9.0
+offset_right = 1282.0
+offset_bottom = 663.0
+text = "FIH
+"

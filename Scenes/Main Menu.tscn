@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://brutxh70fob67"]
 
 [ext_resource type="Texture2D" uid="uid://dkqlgwllcrsov" path="res://VGDA Fall 5-Day Game Jam/Assets/Start Screen/Temp background.png" id="1_aire5"]
+[ext_resource type="Script" uid="uid://cor2wyemwu42h" path="res://VGDA Fall 5-Day Game Jam/Scenes/main_menu.gd" id="1_r7rhf"]
 [ext_resource type="AudioStream" uid="uid://x452amtb4f8t" path="res://VGDA Fall 5-Day Game Jam/Assets/SFX/Fih Theme.mp3" id="2_56txt"]
 
 [node name="MainMenu" type="Node2D" unique_id=184303805]
+script = ExtResource("1_r7rhf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=433568977]
 position = Vector2(637.0001, 325)
@@ -17,3 +19,13 @@ stream = ExtResource("2_56txt")
 volume_db = -11.085
 autoplay = true
 parameters/looping = true
+
+[node name="Start" type="Button" parent="." unique_id=1092382283]
+offset_left = 613.0
+offset_top = 323.0
+offset_right = 923.0
+offset_bottom = 410.0
+theme_override_font_sizes/font_size = 58
+text = "Start"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
