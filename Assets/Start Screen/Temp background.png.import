@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkqlgwllcrsov"
-path="res://.godot/imported/Temp background.png-85269cfd449388764d32b131e3843fe1.ctex"
+path="res://.godot/imported/Temp background.png-bd1b08570dd38479aaf62a9fb48647af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VGDA Fall 5-Day Game Jam/Assets/Start Screen/Temp background.png"
-dest_files=["res://.godot/imported/Temp background.png-85269cfd449388764d32b131e3843fe1.ctex"]
+source_file="res://Assets/Start Screen/Temp background.png"
+dest_files=["res://.godot/imported/Temp background.png-bd1b08570dd38479aaf62a9fb48647af.ctex"]
 
 [params]
 

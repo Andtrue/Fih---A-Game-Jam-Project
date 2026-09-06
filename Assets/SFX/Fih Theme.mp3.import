@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://x452amtb4f8t"
-path="res://.godot/imported/Fih Theme.mp3-14f5cd8424b7c9672ad531643450c0aa.mp3str"
+path="res://.godot/imported/Fih Theme.mp3-e0b7ce58af7d08a4c458f02220657f25.mp3str"
 
 [deps]
 
-source_file="res://VGDA Fall 5-Day Game Jam/Assets/SFX/Fih Theme.mp3"
-dest_files=["res://.godot/imported/Fih Theme.mp3-14f5cd8424b7c9672ad531643450c0aa.mp3str"]
+source_file="res://Assets/SFX/Fih Theme.mp3"
+dest_files=["res://.godot/imported/Fih Theme.mp3-e0b7ce58af7d08a4c458f02220657f25.mp3str"]
 
 [params]
 

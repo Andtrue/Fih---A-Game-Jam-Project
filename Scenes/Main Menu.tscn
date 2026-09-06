@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://brutxh70fob67"]
 
-[ext_resource type="Texture2D" uid="uid://dkqlgwllcrsov" path="res://VGDA Fall 5-Day Game Jam/Assets/Start Screen/Temp background.png" id="1_aire5"]
-[ext_resource type="Script" uid="uid://cor2wyemwu42h" path="res://VGDA Fall 5-Day Game Jam/Scenes/main_menu.gd" id="1_r7rhf"]
-[ext_resource type="AudioStream" uid="uid://x452amtb4f8t" path="res://VGDA Fall 5-Day Game Jam/Assets/SFX/Fih Theme.mp3" id="2_56txt"]
+[ext_resource type="Texture2D" uid="uid://dkqlgwllcrsov" path="res://Assets/Start Screen/Temp background.png" id="1_aire5"]
+[ext_resource type="Script" uid="uid://cor2wyemwu42h" path="res://Scenes/main_menu.gd" id="1_r7rhf"]
+[ext_resource type="AudioStream" uid="uid://x452amtb4f8t" path="res://Assets/SFX/Fih Theme.mp3" id="2_56txt"]
 
 [node name="MainMenu" type="Node2D" unique_id=184303805]
 script = ExtResource("1_r7rhf")
