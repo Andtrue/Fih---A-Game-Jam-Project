@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://brutxh70fob67"]
+
+[ext_resource type="Texture2D" uid="uid://dkqlgwllcrsov" path="res://VGDA Fall 5-Day Game Jam/Assets/Start Screen/Temp background.png" id="1_aire5"]
+[ext_resource type="AudioStream" uid="uid://x452amtb4f8t" path="res://VGDA Fall 5-Day Game Jam/Assets/SFX/Fih Theme.mp3" id="2_56txt"]
+
+[node name="MainMenu" type="Node2D" unique_id=184303805]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=433568977]
+position = Vector2(642, 325.75)
+scale = Vector2(0.91810346, 0.79620564)
+texture = ExtResource("1_aire5")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1012158439]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioListener2D" unique_id=1658663749]
+stream = ExtResource("2_56txt")
+volume_db = -11.085
+autoplay = true
+parameters/looping = true
