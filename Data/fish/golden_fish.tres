@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_lqfcy")
-fish_name = "Pike"
-difficulty = 65.0
-min_cast_distance = 60.0
-catch_weight = 10.0
-sell_value = 120
+fish_name = "Golden Fih"
+difficulty = 90.0
+min_cast_distance = 85.0
+catch_weight = 2.0
+sell_value = 500
 metadata/_custom_type_script = "uid://bxmupg1c30hsa"
