@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c2resm5vatngk"]
+
+[node name="slip" type="AcceptDialog" unique_id=660402363]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(270, 100)
+visible = true
+ok_button_text = "blub blub"
+dialog_text = "You slipped and fell in the water!"
