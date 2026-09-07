@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://647qidtc78vk"]
 
+[ext_resource type="AudioStream" uid="uid://vxschmby34dv" path="res://Assets/SFX/Family Guy Seagull.mp3" id="1_hcqyv"]
+
 [node name="Seagull" type="AcceptDialog" unique_id=104330807]
 oversampling_override = 1.0
+position = Vector2i(500, 280)
 size = Vector2i(257, 100)
 visible = true
 ok_button_text = "dang"
 dialog_text = "Your fih got stolen by a seagull!"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=45981557]
+stream = ExtResource("1_hcqyv")
+autoplay = true
