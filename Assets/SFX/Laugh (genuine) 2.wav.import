@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bj6id8ug6embu"
+path="res://.godot/imported/Laugh (genuine) 2.wav-c92e57364c67d8363a0f3d5d02efd08e.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Laugh (genuine) 2.wav"
+dest_files=["res://.godot/imported/Laugh (genuine) 2.wav-c92e57364c67d8363a0f3d5d02efd08e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
