@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bwi8netdhpuu" path="res://Assets/Fishing Assets/fishing background.png" id="1_ucymg"]
 [ext_resource type="Texture2D" uid="uid://vp6lskd4nqqi" path="res://Assets/Fishing Assets/Fishing Bar.png" id="2_rj2nb"]
 [ext_resource type="Texture2D" uid="uid://c4yvmuqhap0ga" path="res://Assets/Fishing Assets/Moving Bar.png" id="3_7cp3m"]
+[ext_resource type="Script" uid="uid://bscaibpkl4pbn" path="res://Scenes/rigid_body_2d.gd" id="3_pevav"]
 [ext_resource type="Texture2D" uid="uid://2iiggj6bsae8" path="res://Assets/Fishing Assets/Temp Fish Bobber.png" id="4_pevav"]
+[ext_resource type="AudioStream" uid="uid://x452amtb4f8t" path="res://Assets/SFX/Fih Theme.mp3" id="6_pevav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
 size = Vector2(7.399994, 96.60002)
@@ -28,10 +30,10 @@ expand_mode = 2
 texture = ExtResource("2_rj2nb")
 
 [node name="GrooveJoint2D" type="GrooveJoint2D" parent="Outside" unique_id=209682896]
-position = Vector2(0, -30)
+position = Vector2(0, -28)
 node_a = NodePath("../StaticBody2D")
 node_b = NodePath("../RigidBody2D")
-length = 60.0
+length = 58.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Outside" unique_id=41997744]
 
@@ -41,17 +43,24 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_b7ym8")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Outside" unique_id=1340067036]
+script = ExtResource("3_pevav")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Outside/RigidBody2D" unique_id=1427323990]
-position = Vector2(0.5, -0.70000076)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_yuhor")
 
 [node name="Inside" type="Sprite2D" parent="Outside/RigidBody2D" unique_id=1368532589]
-position = Vector2(1, 0)
-scale = Vector2(0.9999998, 0.9999998)
+position = Vector2(4, 0)
+scale = Vector2(5, 5)
 texture = ExtResource("3_7cp3m")
 
 [node name="Fish" type="Sprite2D" parent="." unique_id=759257365]
 position = Vector2(17, 0)
 texture = ExtResource("4_pevav")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=291997540]
+
+[node name="FihTheme" type="AudioStreamPlayer" parent="AudioListener2D" unique_id=365914012]
+stream = ExtResource("6_pevav")
+volume_db = -21.606
+autoplay = true
