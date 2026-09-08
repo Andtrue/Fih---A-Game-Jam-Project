@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c2resm5vatngk"]
 
-[ext_resource type="AudioStream" uid="uid://cdkacjhg72b1u" path="res://Assets/SFX/metal pipe falling sound effect 4.mp3" id="1_mevrx"]
+[ext_resource type="Script" uid="uid://jh3ve5px1h6r" path="res://Data/Events/slip.gd" id="1_mevrx"]
 
 [node name="slip" type="AcceptDialog" unique_id=660402363]
 oversampling_override = 1.0
@@ -9,7 +9,6 @@ size = Vector2i(270, 100)
 visible = true
 ok_button_text = "blub blub"
 dialog_text = "You slipped and fell in the water!"
+script = ExtResource("1_mevrx")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1275974796]
-stream = ExtResource("1_mevrx")
-autoplay = true
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=255868460]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://s1e8xckp5w50"
+path="res://.godot/imported/Fahh - meme sound effect.mp3-f9aed00a9edc1fe3fc910bca307ac670.mp3str"
+
+[deps]
+
+source_file="res://Assets/SFX/Fahh - meme sound effect.mp3"
+dest_files=["res://.godot/imported/Fahh - meme sound effect.mp3-f9aed00a9edc1fe3fc910bca307ac670.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

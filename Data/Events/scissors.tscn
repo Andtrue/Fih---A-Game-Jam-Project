@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cq7vbhpygo8ex"]
 
-[ext_resource type="AudioStream" uid="uid://dthvlv3sn3lxr" path="res://Assets/SFX/Cat Laughing At You 4.mp3" id="1_vigxb"]
+[ext_resource type="Script" uid="uid://v0xsy8cxhpar" path="res://Data/Events/scissors.gd" id="1_3m42y"]
 
 [node name="scissors" type="AcceptDialog" unique_id=1519082122]
 oversampling_override = 1.0
@@ -9,8 +9,6 @@ size = Vector2i(277, 100)
 visible = true
 ok_button_text = "FAHH"
 dialog_text = "The fih cut your line with scissors!"
+script = ExtResource("1_3m42y")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1093977203]
-stream = ExtResource("1_vigxb")
-volume_db = -10.947
-autoplay = true
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=872081356]
