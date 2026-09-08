@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gpq1x6tec53n"
-path="res://.godot/imported/Fish Bar.png-3b8768cc5b5e61fe018568822434d7b9.ctex"
+uid="uid://c4yvmuqhap0ga"
+path="res://.godot/imported/Moving Bar.png-bae8a6bb53baed96920af182c3d01b2e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fishing Assets/Fish Bar.png"
-dest_files=["res://.godot/imported/Fish Bar.png-3b8768cc5b5e61fe018568822434d7b9.ctex"]
+source_file="res://Assets/Fishing Assets/Moving Bar.png"
+dest_files=["res://.godot/imported/Moving Bar.png-bae8a6bb53baed96920af182c3d01b2e.ctex"]
 
 [params]
 

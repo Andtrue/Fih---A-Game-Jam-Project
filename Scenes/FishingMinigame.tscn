@@ -1,10 +1,57 @@
 [gd_scene format=3 uid="uid://wa8anrxt67fd"]
 
 [ext_resource type="Texture2D" uid="uid://bwi8netdhpuu" path="res://Assets/Fishing Assets/fishing background.png" id="1_ucymg"]
+[ext_resource type="Texture2D" uid="uid://vp6lskd4nqqi" path="res://Assets/Fishing Assets/Fishing Bar.png" id="2_rj2nb"]
+[ext_resource type="Texture2D" uid="uid://c4yvmuqhap0ga" path="res://Assets/Fishing Assets/Moving Bar.png" id="3_7cp3m"]
+[ext_resource type="Texture2D" uid="uid://2iiggj6bsae8" path="res://Assets/Fishing Assets/Temp Fish Bobber.png" id="4_pevav"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
+size = Vector2(7.399994, 96.60002)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yuhor"]
+size = Vector2(7.3999977, 33.000004)
 
 [node name="FishingMinigame" type="Node2D" unique_id=1015336884]
+position = Vector2(400, 300)
+scale = Vector2(5, 5)
 
 [node name="Background" type="TextureRect" parent="." unique_id=1009588292]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -80.0
+offset_top = -60.000004
+offset_right = 175.99998
+offset_bottom = 83.999985
+offset_transform_enabled = true
 texture = ExtResource("1_ucymg")
+expand_mode = 2
+
+[node name="Outside" type="Sprite2D" parent="." unique_id=914871814]
+texture = ExtResource("2_rj2nb")
+
+[node name="GrooveJoint2D" type="GrooveJoint2D" parent="Outside" unique_id=209682896]
+position = Vector2(0, -30)
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../RigidBody2D")
+length = 60.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Outside" unique_id=41997744]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outside/StaticBody2D" unique_id=226227940]
+position = Vector2(0.5, 1.0999985)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_b7ym8")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Outside" unique_id=1340067036]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Outside/RigidBody2D" unique_id=1427323990]
+position = Vector2(0.5, -0.70000076)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_yuhor")
+
+[node name="Inside" type="Sprite2D" parent="Outside/RigidBody2D" unique_id=1368532589]
+position = Vector2(1, 0)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("3_7cp3m")
+
+[node name="Fish" type="Sprite2D" parent="." unique_id=759257365]
+position = Vector2(17, 0)
+texture = ExtResource("4_pevav")

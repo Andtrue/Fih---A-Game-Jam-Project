@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bytyk3hrptsp0"
-path="res://.godot/imported/fishing background temp.png-00962c9e91fc46364561846ac2cba8b8.ctex"
+uid="uid://u763gcbywliw"
+path="res://.godot/imported/Progress Frame.png-340044ea8332262d522d6575c46cf44a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fishing Assets/fishing background temp.png"
-dest_files=["res://.godot/imported/fishing background temp.png-00962c9e91fc46364561846ac2cba8b8.ctex"]
+source_file="res://Assets/Fishing Assets/Progress Frame.png"
+dest_files=["res://.godot/imported/Progress Frame.png-340044ea8332262d522d6575c46cf44a.ctex"]
 
 [params]
 

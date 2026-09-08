@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b70vkswva3awk"
-path="res://.godot/imported/Fish Progress Bar.png-6959e88d21115750813e65adacb0b53d.ctex"
+uid="uid://vp6lskd4nqqi"
+path="res://.godot/imported/Fishing Bar.png-60958897ae0f13c4dc77248ac2d05bce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fishing Assets/Fish Progress Bar.png"
-dest_files=["res://.godot/imported/Fish Progress Bar.png-6959e88d21115750813e65adacb0b53d.ctex"]
+source_file="res://Assets/Fishing Assets/Fishing Bar.png"
+dest_files=["res://.godot/imported/Fishing Bar.png-60958897ae0f13c4dc77248ac2d05bce.ctex"]
 
 [params]
 
