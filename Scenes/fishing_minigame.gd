@@ -12,6 +12,6 @@ func _on_timer_timeout() -> void:
 	if is_on_bar:
 		%TextureProgressBar.value += 5
 	else:
-		%TextureProgressBar.value -= 5
+		%TextureProgressBar.value -= 1
 	if %TextureProgressBar.value >= 100:
 		print('fish caught')
