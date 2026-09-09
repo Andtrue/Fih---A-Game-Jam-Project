@@ -1,7 +1,7 @@
 extends Sprite2D
 
 
-var move_distance = 10
+var move_distance = 50
 var move_time = 0.5
 
 func _ready() -> void:
