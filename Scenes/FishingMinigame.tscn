@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bnwo1nnngcqo3" path="res://Scenes/fish.gd" id="8_80aay"]
 [ext_resource type="Texture2D" uid="uid://u763gcbywliw" path="res://Assets/Fishing Assets/Progress Frame.png" id="8_431do"]
 [ext_resource type="Texture2D" uid="uid://daii35xgpjjav" path="res://Assets/Fishing Assets/Progress Bar.png" id="9_80aay"]
+[ext_resource type="Script" uid="uid://tt1j4kmmv24x" path="res://Scenes/events.gd" id="11_80aay"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
 size = Vector2(7.399994, 96.60002)
@@ -98,6 +99,11 @@ texture_progress = ExtResource("9_80aay")
 [node name="Timer" type="Timer" parent="." unique_id=1192790809]
 wait_time = 0.2
 autostart = true
+
+[node name="Node" type="Node" parent="." unique_id=624518649]
+script = ExtResource("11_80aay")
+
+[node name="EventTimer" type="Timer" parent="Node" unique_id=1383912776]
 
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]

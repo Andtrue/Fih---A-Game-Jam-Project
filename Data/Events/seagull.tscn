@@ -4,7 +4,7 @@
 
 [node name="Seagull" type="AcceptDialog" unique_id=104330807]
 oversampling_override = 1.0
-position = Vector2i(500, 280)
+position = Vector2i(0, 36)
 size = Vector2i(257, 100)
 visible = true
 ok_button_text = "dang"
