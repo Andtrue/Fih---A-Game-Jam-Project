@@ -1,21 +1,37 @@
 [gd_scene format=3 uid="uid://wa8anrxt67fd"]
 
+[ext_resource type="Script" uid="uid://cn7erwy2c6qqc" path="res://Scenes/fishing_minigame.gd" id="1_l182o"]
 [ext_resource type="Texture2D" uid="uid://bwi8netdhpuu" path="res://Assets/Fishing Assets/fishing background.png" id="1_ucymg"]
 [ext_resource type="Texture2D" uid="uid://vp6lskd4nqqi" path="res://Assets/Fishing Assets/Fishing Bar.png" id="2_rj2nb"]
 [ext_resource type="Texture2D" uid="uid://c4yvmuqhap0ga" path="res://Assets/Fishing Assets/Moving Bar.png" id="3_7cp3m"]
 [ext_resource type="Script" uid="uid://bscaibpkl4pbn" path="res://Scenes/rigid_body_2d.gd" id="3_pevav"]
 [ext_resource type="Texture2D" uid="uid://2iiggj6bsae8" path="res://Assets/Fishing Assets/Temp Fish Bobber.png" id="4_pevav"]
 [ext_resource type="AudioStream" uid="uid://x452amtb4f8t" path="res://Assets/SFX/Fih Theme.mp3" id="6_pevav"]
+[ext_resource type="Script" uid="uid://bnwo1nnngcqo3" path="res://Scenes/fish.gd" id="8_80aay"]
+[ext_resource type="Texture2D" uid="uid://u763gcbywliw" path="res://Assets/Fishing Assets/Progress Frame.png" id="8_431do"]
+[ext_resource type="Texture2D" uid="uid://daii35xgpjjav" path="res://Assets/Fishing Assets/Progress Bar.png" id="9_80aay"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
 size = Vector2(7.399994, 96.60002)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yuhor"]
-size = Vector2(7.3999977, 33.000004)
+size = Vector2(7.3999977, 108.80002)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_st70h"]
+size = Vector2(7.9999847, 5.5999985)
 
 [node name="FishingMinigame" type="Node2D" unique_id=1015336884]
 position = Vector2(400, 300)
 scale = Vector2(5, 5)
+script = ExtResource("1_l182o")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=291997540]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="FihTheme" type="AudioStreamPlayer" parent="AudioListener2D" unique_id=365914012]
+stream = ExtResource("6_pevav")
+volume_db = -21.606
+autoplay = true
 
 [node name="Background" type="TextureRect" parent="." unique_id=1009588292]
 offset_left = -80.0
@@ -46,6 +62,7 @@ shape = SubResource("RectangleShape2D_b7ym8")
 script = ExtResource("3_pevav")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Outside/RigidBody2D" unique_id=1427323990]
+position = Vector2(0, 0.79999924)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_yuhor")
 
@@ -55,12 +72,34 @@ scale = Vector2(5, 5)
 texture = ExtResource("3_7cp3m")
 
 [node name="Fish" type="Sprite2D" parent="." unique_id=759257365]
+z_index = 4
 position = Vector2(17, 0)
 texture = ExtResource("4_pevav")
+script = ExtResource("8_80aay")
 
-[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=291997540]
+[node name="Area2D" type="Area2D" parent="Fish" unique_id=257197036]
 
-[node name="FihTheme" type="AudioStreamPlayer" parent="AudioListener2D" unique_id=365914012]
-stream = ExtResource("6_pevav")
-volume_db = -21.606
-autoplay = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish/Area2D" unique_id=663961506]
+position = Vector2(-16.799988, -2.5999985)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_st70h")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=353945104]
+unique_name_in_owner = true
+z_index = 10
+offset_left = -49.399998
+offset_top = -49.2
+offset_right = 50.600002
+offset_bottom = 50.8
+fill_mode = 3
+texture_under = ExtResource("8_431do")
+texture_progress = ExtResource("9_80aay")
+
+[node name="Timer" type="Timer" parent="." unique_id=1192790809]
+wait_time = 0.2
+autostart = true
+
+[connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="Fish" method="_on_timer_timeout"]

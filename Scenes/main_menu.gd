@@ -8,4 +8,4 @@ func _ready() -> void:
 
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/Fishing.tscn")
+	get_tree().change_scene_to_file("res://Scenes/FishingMinigame.tscn")
