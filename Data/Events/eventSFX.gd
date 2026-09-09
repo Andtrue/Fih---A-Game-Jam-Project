@@ -29,6 +29,13 @@ const SFX: Array[AudioStream] = [
 const CAT_TEXTURE: Texture2D = preload("res://Assets/Event Textures/cat-laughing-4.webp")
 
 func _ready():
+	var dialog_label: Label = get_label()
+
+	dialog_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	dialog_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	dialog_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+	dialog_label.add_theme_constant_override("line_spacing", 5)
 	play_random_sfx()
 
 func play_random_sfx() -> void:
@@ -50,5 +57,5 @@ func apply_cat_texture():
 		background.texture = CAT_TEXTURE
 		add_theme_stylebox_override("panel", background)	# apply background texture	
 		
-		var image_size: Vector2i = Vector2i(CAT_TEXTURE.get_size() * 0.25)
+		var image_size: Vector2i = Vector2i(CAT_TEXTURE.get_size() * 0.4)
 		size = image_size

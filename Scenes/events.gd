@@ -10,7 +10,7 @@ const EVENTS: Array[PackedScene] = [
 	EVENT3
 ]
 
-@export var event_timer : float = randf_range(5,5)
+@export var event_timer : float = randf_range(5,15)
 @export_range(0.0,1.0) var event_chance : float = 1	# chance for an event (currently 100%)
 
 @onready var timer = $EventTimer
