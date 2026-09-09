@@ -1,14 +1,31 @@
 [gd_scene format=3 uid="uid://c2resm5vatngk"]
 
-[ext_resource type="Script" uid="uid://jh3ve5px1h6r" path="res://Data/Events/slip.gd" id="1_mevrx"]
+[ext_resource type="Script" uid="uid://bkojhhr8uyj2" path="res://Data/Events/eventSFX.gd" id="1_mevrx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rf2m"]
+bg_color = Color(1, 0.6, 0.19215687, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.6, 0.19215687, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="slip" type="AcceptDialog" unique_id=660402363]
+transparent_bg = true
 oversampling_override = 1.0
 position = Vector2i(500, 280)
 size = Vector2i(270, 100)
 visible = true
+borderless = true
+transparent = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_7rf2m")
 ok_button_text = "blub blub"
 dialog_text = "You slipped and fell in the water!"
+dialog_close_on_escape = false
 script = ExtResource("1_mevrx")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=255868460]

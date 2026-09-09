@@ -1,14 +1,31 @@
 [gd_scene format=3 uid="uid://cq7vbhpygo8ex"]
 
-[ext_resource type="Script" uid="uid://v0xsy8cxhpar" path="res://Data/Events/scissors.gd" id="1_3m42y"]
+[ext_resource type="Script" uid="uid://bkojhhr8uyj2" path="res://Data/Events/eventSFX.gd" id="1_vigxb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hcqyv"]
+bg_color = Color(1, 0.6, 0.19215687, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.6, 0.19215687, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="scissors" type="AcceptDialog" unique_id=1519082122]
+transparent_bg = true
 oversampling_override = 1.0
-position = Vector2i(500, 280)
+position = Vector2i(0, 36)
 size = Vector2i(277, 100)
 visible = true
+borderless = true
+transparent = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_hcqyv")
 ok_button_text = "FAHH"
 dialog_text = "The fih cut your line with scissors!"
-script = ExtResource("1_3m42y")
+dialog_close_on_escape = false
+script = ExtResource("1_vigxb")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=872081356]
