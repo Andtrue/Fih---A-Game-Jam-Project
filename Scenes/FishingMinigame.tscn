@@ -17,6 +17,9 @@
 [ext_resource type="Resource" uid="uid://blf1oq2ucpsnv" path="res://Data/fish/minnow.tres" id="16_axes7"]
 [ext_resource type="Texture2D" uid="uid://drtw8g1cgamnm" path="res://Assets/Fishing Assets/fishingrod.png" id="17_fstn3"]
 [ext_resource type="Resource" uid="uid://cvn6kepvy8vto" path="res://Data/fish/golden_fish.tres" id="17_iwx3l"]
+[ext_resource type="AudioStream" uid="uid://cq1deloxy3ec3" path="res://Assets/SFX/Fishing Reel High.mp3" id="18_fstn3"]
+[ext_resource type="AudioStream" uid="uid://yd0j6kmh6yat" path="res://Assets/SFX/Win.mp3" id="20_axes7"]
+[ext_resource type="AudioStream" uid="uid://duq8a2wci514" path="res://Assets/SFX/Lost.mp3" id="21_iwx3l"]
 [ext_resource type="Script" uid="uid://cjha4s8h86tf0" path="res://Scenes/rod_hold.gd" id="22_rodhold"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
@@ -162,6 +165,18 @@ script = ExtResource("22_rodhold")
 unique_name_in_owner = true
 position = Vector2(-286.6665, -1279.9998)
 scale = Vector2(16.666668, 16.666668)
+
+[node name="ReelSFX" type="AudioStreamPlayer2D" parent="." unique_id=823228903]
+stream = ExtResource("18_fstn3")
+volume_db = -11.178
+
+[node name="WinSFX" type="AudioStreamPlayer2D" parent="." unique_id=2029534698]
+scale = Vector2(0.99999976, 0.99999976)
+stream = ExtResource("20_axes7")
+
+[node name="LoseSFX" type="AudioStreamPlayer2D" parent="." unique_id=39866367]
+scale = Vector2(0.9999998, 0.9999998)
+stream = ExtResource("21_iwx3l")
 
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
