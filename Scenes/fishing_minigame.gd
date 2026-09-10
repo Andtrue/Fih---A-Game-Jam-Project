@@ -3,96 +3,93 @@ extends Node2D
 const SPINNING_FISH_SCENE: PackedScene = preload("res://Data/Events/talking_fih.tscn")
 
 var spinning_fish: Node2D
-var spawn_spinning_fish_next_cast := false
 
 var is_on_bar = false
 var is_fishing = false
 var fish_count = 0
-
+var leaving = false # ADDED
+@export var cast_scene: String = "res://Scenes/CastMinigame.tscn" # ADDED
+@export var return_delay: float = 2.0 # ADDED
 func _ready() -> void:
 	# Stop all timers at the beginning
 	$Timer.stop()
 	$Node/EventTimer.stop()
 	$FishingStartTimer.stop()
-
 	# White Box Pause
 	
 	# Hide the fishing UI
 	$Outside.hide()
 	$Fish.hide()
 	%TextureProgressBar.hide()
-
 	# Disable the fishing bar
 	$Outside/RigidBody2D.set_process_input(false)
-
 	# Stop fish movement
 	$Fish.process_mode = Node.PROCESS_MODE_DISABLED
-
 	# Show cast prompt
 	%CastPrompt.show()
-
-
+	# ADDED: restore count, pick fish from cast distance, apply difficulty, auto-start
+	fish_count = GameState.fish_count # ADDED
+	%FishCounter.text = str(fish_count) + " Fih" # ADDED
+	var fish: FishData = $FishManager.select_fish(GameState.cast_distance) # ADDED
+	if fish: # ADDED
+		GameState.current_fish = fish # ADDED
+		print("hooked: ", fish.fish_name, " difficulty ", fish.difficulty) # ADDED
+		$Fish.move_distance = 20 + fish.difficulty * 0.6 # ADDED
+		$Fish.move_time = 0.6 - fish.difficulty * 0.004 # ADDED
+	start_cast() # ADDED
 func _input(event: InputEvent) -> void:
+	if leaving: # ADDED
+		return # ADDED
 	if event.is_action_pressed("ui_accept") and !is_fishing:
 		start_cast()
-
-
 func start_cast() -> void:
 	# Prevent another cast while waiting
 	is_fishing = true
 
 	# Spawn fish when fishing begins again after the first catch.
-	if spawn_spinning_fish_next_cast:
+	if GameState.spawn_spinning_fish_next_cast: # CHANGED: flag moved to GameState so it survives scene reload
 		spawn_spinning_fish()
-		spawn_spinning_fish_next_cast = false
+		GameState.spawn_spinning_fish_next_cast = false # CHANGED
 		
 	%TextureProgressBar.value = 30
 	
 	# Hide prompt
 	%CastPrompt.hide()
-
 	# Show fishing UI
 	$Outside.show()
 	$Fish.show()
 	%TextureProgressBar.show()
-
 	# Start the 1 second delay
 	$FishingStartTimer.start()
-
-
 func _on_fishing_start_timer_timeout() -> void:
 	# The 1 second delay is over.
 	# Now actual fishing starts.
 	$FishingStartTimer.stop()
-
 	$Outside/RigidBody2D.set_process_input(true)
 	$Fish.process_mode = Node.PROCESS_MODE_INHERIT
-
 	$Timer.start()
 	$Node.start_events()
-
-
 func end_fishing() -> void:
 	is_fishing = false
-
 	# Stop all fishing systems
 	$Timer.stop()
 	$Node/EventTimer.stop()
 	$FishingStartTimer.stop()
-
 	# Disable fishing bar
 	$Outside/RigidBody2D.set_process_input(false)
-
 	# Stop fish movement
 	$Fish.process_mode = Node.PROCESS_MODE_DISABLED
-
 	# Hide fishing UI
 	$Outside.hide()
 	$Fish.hide()
 	%TextureProgressBar.hide()
-
 	# Show cast prompt
 	%CastPrompt.show()
+	_return_to_cast() # ADDED
+func _return_to_cast() -> void: # ADDED
+	leaving = true # ADDED
+	await get_tree().create_timer(return_delay).timeout # ADDED
+	get_tree().change_scene_to_file(cast_scene) # ADDED
 
 func spawn_spinning_fish() -> void:
 	# Prevent more than one from being created.
@@ -115,32 +112,27 @@ func spawn_spinning_fish() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	is_on_bar = true
-
-
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	is_on_bar = false
-
-
 func _on_timer_timeout() -> void:
 	if !is_fishing:
 		return
-
 	if is_on_bar:
 		%TextureProgressBar.value += 4
 	else:
 		%TextureProgressBar.value -= 3
-
 	if %TextureProgressBar.value >= 100:
 		print("fish caught")
-
 		fish_count += 1
+		GameState.fish_count = fish_count # ADDED
 		%FishCounter.text = str(fish_count) + " Fih"
 		
 		if fish_count == 1:
-			spawn_spinning_fish_next_cast = true
+			GameState.spawn_spinning_fish_next_cast = true # CHANGED: was local var
 		
+		%CastPrompt.text = "FISH CAUGHT!" # ADDED
 		end_fishing()
-
 	elif %TextureProgressBar.value <= 0:
 		print("fish escaped")
+		%CastPrompt.text = "FISH ESCAPED!" # ADDED
 		end_fishing()

@@ -6,11 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://c4yvmuqhap0ga" path="res://Assets/Fishing Assets/Moving Bar.png" id="3_7cp3m"]
 [ext_resource type="Script" uid="uid://bscaibpkl4pbn" path="res://Scenes/rigid_body_2d.gd" id="3_pevav"]
 [ext_resource type="Texture2D" uid="uid://2iiggj6bsae8" path="res://Assets/Fishing Assets/Temp Fish Bobber.png" id="4_pevav"]
-[ext_resource type="AudioStream" uid="uid://ctp0xdgiw0aln" path="res://Assets/SFX/Fih Theme.mp3" id="6_pevav"]
 [ext_resource type="Script" uid="uid://bnwo1nnngcqo3" path="res://Scenes/fish.gd" id="8_80aay"]
 [ext_resource type="Texture2D" uid="uid://u763gcbywliw" path="res://Assets/Fishing Assets/Progress Frame.png" id="8_431do"]
 [ext_resource type="Texture2D" uid="uid://daii35xgpjjav" path="res://Assets/Fishing Assets/Progress Bar.png" id="9_80aay"]
 [ext_resource type="Script" uid="uid://tt1j4kmmv24x" path="res://Scenes/events.gd" id="11_80aay"]
+[ext_resource type="Script" uid="uid://bd1dmfobwv0pc" path="res://Fishing/fish_manager.gd" id="12_t51q7"]
+[ext_resource type="Script" uid="uid://bxmupg1c30hsa" path="res://Data/fish_data.gd" id="13_fstn3"]
+[ext_resource type="Resource" uid="uid://bjj36i1kh3vf8" path="res://Data/fish/bass.tres" id="14_4ohcb"]
+[ext_resource type="Resource" uid="uid://kk8xi78n1ek0" path="res://Data/fish/pike.tres" id="15_ll42e"]
+[ext_resource type="Resource" uid="uid://blf1oq2ucpsnv" path="res://Data/fish/minnow.tres" id="16_axes7"]
+[ext_resource type="Resource" uid="uid://cvn6kepvy8vto" path="res://Data/fish/golden_fish.tres" id="17_iwx3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
 size = Vector2(7.399994, 96.60002)
@@ -25,14 +30,6 @@ size = Vector2(7.9999847, 5.5999985)
 position = Vector2(400, 300)
 scale = Vector2(5, 5)
 script = ExtResource("1_l182o")
-
-[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=291997540]
-scale = Vector2(0.99999994, 0.99999994)
-
-[node name="FihTheme" type="AudioStreamPlayer" parent="AudioListener2D" unique_id=365914012]
-stream = ExtResource("6_pevav")
-volume_db = -21.606
-autoplay = true
 
 [node name="Background" type="TextureRect" parent="." unique_id=1009588292]
 offset_left = -80.0
@@ -134,6 +131,10 @@ offset_transform_scale = Vector2(0.145, 0.145)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 85
 text = "0 Fih"
+
+[node name="FishManager" type="Node" parent="." unique_id=1504383881]
+script = ExtResource("12_t51q7")
+all_fish = Array[ExtResource("13_fstn3")]([ExtResource("14_4ohcb"), ExtResource("15_ll42e"), ExtResource("16_axes7"), ExtResource("17_iwx3l")])
 
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]

@@ -28,6 +28,7 @@ var blink_tween: Tween
 
 
 func _ready() -> void:
+	%FishCounter.text = str(GameState.fish_count) + " Fih"
 	%Fade.modulate.a = 0.0
 	_reset_for_cast()
 
