@@ -4,8 +4,6 @@ var is_on_bar = false
 var is_fishing = false
 var fish_count = 0
 var leaving = false # ADDED
-var elapsed_time: float = 0.0
-var tracking_time := false
 @export var cast_scene: String = "res://Scenes/CastMinigame.tscn" # ADDED
 @export var return_delay: float = 2.0 # ADDED
 
@@ -40,19 +38,6 @@ func _ready() -> void:
 		#$Fish.move_time = 0.6 - fish.difficulty * 0.004 # ADDED
 	start_cast() # ADDED
 
-func _process(delta: float) -> void:
-	if tracking_time:
-		elapsed_time += delta
-
-func start_tracking() -> void:
-	elapsed_time = 0.0
-	tracking_time = true
-	
-
-func stop_tracking() -> void:
-	tracking_time = false
-	print("Final time: ", elapsed_time)
-
 func _input(event: InputEvent) -> void:
 	if leaving: # ADDED
 		return # ADDED
@@ -62,7 +47,8 @@ func _input(event: InputEvent) -> void:
 func start_cast() -> void:
 	# Prevent another cast while waiting
 	is_fishing = true
-		
+	
+	GameState.start_fishing_timer()
 	%TextureProgressBar.value = 30
 	
 	# Hide prompt
@@ -82,7 +68,6 @@ func _on_fishing_start_timer_timeout() -> void:
 	$Fish.process_mode = Node.PROCESS_MODE_INHERIT
 	$Timer.start()
 	$Node.start_events()
-	tracking_time = true
 
 func end_fishing() -> void:
 	is_fishing = false
@@ -128,13 +113,15 @@ func _on_timer_timeout() -> void:
 		FihTopLayer.spawn_fish(fish_count)			# To change the fih spawn thresholds, put inside if and elif statements
 		if fish_count == 2:		# Game win condition
 			print("you win")
-			tracking_time = false
 			$Timer.stop()
 			$Node/EventTimer.stop()
 			$FishingStartTimer.stop()
-			$GameEnd.dialog_text = ("You fished for %.1f seconds" % elapsed_time)
+			var final_time: float = GameState.get_fishing_time()
+			$GameEnd.dialog_text = ("You fished for %.1f seconds" % final_time)
 			$GameEnd.popup_centered()
+			
 			await $GameEnd.confirmed
+			
 			%CastPrompt.text = "FISH CAUGHT!" # ADDED
 			end_fishing()
 			return
