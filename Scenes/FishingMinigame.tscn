@@ -15,12 +15,9 @@
 [ext_resource type="Resource" uid="uid://bjj36i1kh3vf8" path="res://Data/fish/bass.tres" id="14_4ohcb"]
 [ext_resource type="Resource" uid="uid://kk8xi78n1ek0" path="res://Data/fish/pike.tres" id="15_ll42e"]
 [ext_resource type="Resource" uid="uid://blf1oq2ucpsnv" path="res://Data/fish/minnow.tres" id="16_axes7"]
+[ext_resource type="Texture2D" uid="uid://drtw8g1cgamnm" path="res://Assets/Fishing Assets/fishingrod.png" id="17_fstn3"]
 [ext_resource type="Resource" uid="uid://cvn6kepvy8vto" path="res://Data/fish/golden_fish.tres" id="17_iwx3l"]
-[ext_resource type="Texture2D" uid="uid://yn5t7ctxnv4e" path="res://Assets/Rod/Stih.png" id="17_t51q7"]
-[ext_resource type="AudioStream" uid="uid://cmjmrydl1fogq" path="res://Assets/SFX/Final Fantasy 7 Remake Victory Fanfare - Sound effects HD _ sfx _ No copyright ( download Link ).mp3" id="18_4ohcb"]
-[ext_resource type="AudioStream" uid="uid://cq1deloxy3ec3" path="res://Assets/SFX/Fishing Reel High.mp3" id="18_fstn3"]
-[ext_resource type="AudioStream" uid="uid://yd0j6kmh6yat" path="res://Assets/SFX/Win.mp3" id="20_axes7"]
-[ext_resource type="AudioStream" uid="uid://duq8a2wci514" path="res://Assets/SFX/Lost.mp3" id="21_iwx3l"]
+[ext_resource type="Script" uid="uid://cjha4s8h86tf0" path="res://Scenes/rod_hold.gd" id="22_rodhold"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
 size = Vector2(7.399994, 96.60002)
@@ -44,6 +41,13 @@ offset_bottom = 83.999985
 offset_transform_enabled = true
 texture = ExtResource("1_ucymg")
 expand_mode = 2
+
+[node name="FishingLine" type="Line2D" parent="Background" unique_id=234330722]
+unique_name_in_owner = true
+position = Vector2(80, 60.000004)
+scale = Vector2(0.99999976, 0.99999976)
+width = 2.0
+default_color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Outside" type="Sprite2D" parent="." unique_id=914871814]
 texture = ExtResource("2_rj2nb")
@@ -141,33 +145,23 @@ text = "0 Fih"
 script = ExtResource("12_t51q7")
 all_fish = Array[ExtResource("13_fstn3")]([ExtResource("14_4ohcb"), ExtResource("15_ll42e"), ExtResource("16_axes7"), ExtResource("17_iwx3l")])
 
-[node name="Stih" type="Sprite2D" parent="." unique_id=462530563]
-position = Vector2(101.799995, 36)
-rotation = -0.18675023
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("17_t51q7")
-
 [node name="GameEnd" type="AcceptDialog" parent="." unique_id=595037841]
 oversampling_override = 1.0
 title = "All fih caught!"
 ok_button_text = "Continue?"
 
-[node name="GameEndSFX" type="AudioStreamPlayer" parent="GameEnd" unique_id=515834662]
-stream = ExtResource("18_4ohcb")
-volume_db = -16.791
+[node name="FishingRod" type="Sprite2D" parent="." unique_id=1510789238]
+unique_name_in_owner = true
+position = Vector2(110.20001, 76)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("17_fstn3")
+offset = Vector2(-200, -600)
+script = ExtResource("22_rodhold")
 
-[node name="ReelSFX" type="AudioStreamPlayer2D" parent="." unique_id=619363942]
-stream = ExtResource("18_fstn3")
-volume_db = -10.691
-
-[node name="WinSFX" type="AudioStreamPlayer2D" parent="." unique_id=1457191265]
-stream = ExtResource("20_axes7")
-volume_db = -1.944
-
-[node name="LoseSFX" type="AudioStreamPlayer2D" parent="." unique_id=515061423]
-scale = Vector2(0.9999998, 0.9999998)
-stream = ExtResource("21_iwx3l")
-volume_db = -1.458
+[node name="Tip" type="Marker2D" parent="FishingRod" unique_id=1161156829]
+unique_name_in_owner = true
+position = Vector2(-286.6665, -1279.9998)
+scale = Vector2(16.666668, 16.666668)
 
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
