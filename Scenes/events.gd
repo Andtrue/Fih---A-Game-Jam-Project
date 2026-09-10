@@ -18,7 +18,7 @@ var active_event: AcceptDialog
 
 
 func _ready():
-	timer.wait_time = randf_range(7, 10)
+	timer.wait_time = randf_range(5, 10)
 	timer.timeout.connect(_on_timer_timeout)
 
 	print("EVENT SYSTEM READY")

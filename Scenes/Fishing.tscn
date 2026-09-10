@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://clhn0beqe0u14"]
 
 [ext_resource type="Script" uid="uid://tt1j4kmmv24x" path="res://Scenes/events.gd" id="1_6yv8f"]
+[ext_resource type="PackedScene" uid="uid://bgw1054acoyk0" path="res://Data/Events/talking_fih.tscn" id="2_aonvm"]
 
 [node name="Fishing" type="Node2D" unique_id=1829919186]
 script = ExtResource("1_6yv8f")
@@ -14,3 +15,6 @@ text = "FIH
 "
 
 [node name="EventTimer" type="Timer" parent="." unique_id=2072281037]
+
+[node name="TalkingFih" parent="." unique_id=91736149 instance=ExtResource("2_aonvm")]
+position = Vector2(814, 347)
