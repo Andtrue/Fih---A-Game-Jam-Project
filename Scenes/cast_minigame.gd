@@ -133,6 +133,7 @@ func _rating(d: float) -> String:
 	if d >= 30.0: return "Meh"
 	return "Weak"
 func _wait_for_bite() -> void:
+	$CastSFX.play()
 	var my_id := cast_id
 	waiting_for_bite = true
 	_set_prompt("Hold Space to Recast\n Or Wait for Bite!", idle_blink_speed)

@@ -47,9 +47,9 @@ func _input(event: InputEvent) -> void:
 func start_cast() -> void:
 	# Prevent another cast while waiting
 	is_fishing = true
-	
+	$ReelSFX.play()
 	GameState.start_fishing_timer()
-	%TextureProgressBar.value = 30
+	%TextureProgressBar.value = 20
 	
 	# Hide prompt
 	%CastPrompt.hide()
@@ -71,6 +71,7 @@ func _on_fishing_start_timer_timeout() -> void:
 
 func end_fishing() -> void:
 	is_fishing = false
+	$ReelSFX.stop()
 	# Stop all fishing systems
 	$Timer.stop()
 	$Node/EventTimer.stop()

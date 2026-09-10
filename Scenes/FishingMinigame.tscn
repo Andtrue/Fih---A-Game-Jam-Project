@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://blf1oq2ucpsnv" path="res://Data/fish/minnow.tres" id="16_axes7"]
 [ext_resource type="Resource" uid="uid://cvn6kepvy8vto" path="res://Data/fish/golden_fish.tres" id="17_iwx3l"]
 [ext_resource type="Texture2D" uid="uid://yn5t7ctxnv4e" path="res://Assets/Rod/Stih.png" id="17_t51q7"]
+[ext_resource type="AudioStream" uid="uid://cq1deloxy3ec3" path="res://Assets/SFX/Fishing Reel High.mp3" id="18_fstn3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
 size = Vector2(7.399994, 96.60002)
@@ -147,6 +148,10 @@ texture = ExtResource("17_t51q7")
 oversampling_override = 1.0
 title = "All fih caught!"
 ok_button_text = "Continue?"
+
+[node name="ReelSFX" type="AudioStreamPlayer2D" parent="." unique_id=619363942]
+stream = ExtResource("18_fstn3")
+volume_db = -6.803
 
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]

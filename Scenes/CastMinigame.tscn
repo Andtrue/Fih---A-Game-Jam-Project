@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d1gdoi030hb4x" path="res://Assets/Rod/Bait.png" id="9_k347l"]
 [ext_resource type="Texture2D" uid="uid://u763gcbywliw" path="res://Assets/Fishing Assets/Progress Frame.png" id="9_mcyfq"]
 [ext_resource type="Texture2D" uid="uid://daii35xgpjjav" path="res://Assets/Fishing Assets/Progress Bar.png" id="10_l5vv2"]
+[ext_resource type="AudioStream" uid="uid://dm3db3wibu6c2" path="res://Assets/SFX/Cast.mp3" id="10_u7oka"]
 
 [node name="CastMiniGame" type="Node2D" unique_id=1015336884]
 position = Vector2(400, 300)
@@ -129,3 +130,6 @@ position = Vector2(7.6293945e-06, 0)
 scale = Vector2(0.9999998, 0.9999998)
 width = 2.0
 default_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="CastSFX" type="AudioStreamPlayer2D" parent="." unique_id=338005200]
+stream = ExtResource("10_u7oka")
