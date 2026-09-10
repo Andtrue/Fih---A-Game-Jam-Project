@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://cq7vbhpygo8ex"]
 
-[ext_resource type="Script" uid="uid://bkojhhr8uyj2" path="res://Data/Events/eventSFX.gd" id="1_vigxb"]
+[ext_resource type="Script" uid="uid://bkojhhr8uyj2" path="res://Data/Events/eventSFX.gd" id="1_ca0qn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hcqyv"]
-bg_color = Color(1, 0.6, 0.19215687, 1)
+bg_color = Color(0.47843137, 0.7411765, 0.93333334, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(1, 0.6, 0.19215687, 1)
+border_color = Color(0.47843137, 0.7411765, 0.93333334, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="scissors" type="AcceptDialog" unique_id=1519082122]
+[node name="fih_spit" type="AcceptDialog" unique_id=1519082122]
 transparent_bg = true
 oversampling_override = 1.0
 position = Vector2i(0, 36)
@@ -23,9 +23,9 @@ visible = true
 borderless = true
 transparent = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_hcqyv")
-ok_button_text = "FAHH"
-dialog_text = "The fih cut your line with scissors!"
+ok_button_text = "FAAHH"
+dialog_text = "The fih spit water in your eye!"
 dialog_close_on_escape = false
-script = ExtResource("1_vigxb")
+script = ExtResource("1_ca0qn")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=872081356]

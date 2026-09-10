@@ -4,7 +4,8 @@ const MESSAGES: Array[String] = [
 	"skibidi",
 	"u ugly",
 	"I eat fih",
-    "ur mom"
+	"ur mom",
+	"nyooooom"
 ]
 
 @export_range(0.0, 1.0) var message_chance := 0.25
@@ -13,8 +14,8 @@ const MESSAGES: Array[String] = [
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var speech_timer: Timer = $Timer
 
-@export var minimum_speed: float = 1.0
-@export var maximum_speed: float = 4.0
+@export var minimum_speed: float = 1
+@export var maximum_speed: float = 20
 @export var cycle_duration: float = 10.0
 
 var active_bubble: Label

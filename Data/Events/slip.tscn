@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://bkojhhr8uyj2" path="res://Data/Events/eventSFX.gd" id="1_mevrx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rf2m"]
-bg_color = Color(1, 0.6, 0.19215687, 1)
+bg_color = Color(0.4509804, 0.8117647, 0.36862746, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(1, 0.6, 0.19215687, 1)
+border_color = Color(0.4509804, 0.8117647, 0.36862746, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -23,8 +23,8 @@ visible = true
 borderless = true
 transparent = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_7rf2m")
-ok_button_text = "blub blub"
-dialog_text = "You slipped and fell in the water!"
+ok_button_text = "mend buttcrack"
+dialog_text = "You slipped and cracked your ass!"
 dialog_close_on_escape = false
 script = ExtResource("1_mevrx")
 

@@ -24,7 +24,7 @@ borderless = true
 transparent = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_mq4c7")
 ok_button_text = "dang"
-dialog_text = "Your fih got stolen by a seagull!"
+dialog_text = "A seagull steals your snacks!"
 dialog_close_on_escape = false
 script = ExtResource("1_iftn3")
 

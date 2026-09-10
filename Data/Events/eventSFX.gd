@@ -18,9 +18,6 @@ const SFX: Array[AudioStream] = [
 	preload("res://Assets/SFX/Trash 3.wav"),
 	preload("res://Assets/SFX/Trash 4.wav"),
 	preload("res://Assets/SFX/Trash 5.wav"),
-	preload("res://Assets/SFX/Whata Bitch 1.wav"),
-	preload("res://Assets/SFX/Whata Bitch 2.wav"),
-	preload("res://Assets/SFX/Whata Bitch 3.wav"),
 	preload("res://Assets/SFX/Fahh - meme sound effect.mp3")
 ]
 

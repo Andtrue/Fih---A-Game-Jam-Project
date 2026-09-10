@@ -1,5 +1,10 @@
 extends Node2D
 
+const SPINNING_FISH_SCENE: PackedScene = preload("res://Data/Events/talking_fih.tscn")
+
+var spinning_fish: Node2D
+var spawn_spinning_fish_next_cast := false
+
 var is_on_bar = false
 var is_fishing = false
 var fish_count = 0
@@ -36,6 +41,11 @@ func start_cast() -> void:
 	# Prevent another cast while waiting
 	is_fishing = true
 
+	# Spawn fish when fishing begins again after the first catch.
+	if spawn_spinning_fish_next_cast:
+		spawn_spinning_fish()
+		spawn_spinning_fish_next_cast = false
+		
 	%TextureProgressBar.value = 30
 	
 	# Hide prompt
@@ -84,6 +94,24 @@ func end_fishing() -> void:
 	# Show cast prompt
 	%CastPrompt.show()
 
+func spawn_spinning_fish() -> void:
+	# Prevent more than one from being created.
+	if is_instance_valid(spinning_fish):
+		return
+
+	spinning_fish = SPINNING_FISH_SCENE.instantiate() as Node2D
+
+	if spinning_fish == null:
+		push_error("Spinning fish scene root must be a Node2D.")
+		return
+
+	spinning_fish.name = "SpinningFish"
+	add_child(spinning_fish)
+
+	# Change this to the desired position.
+	spinning_fish.position = Vector2(-45, -25)
+	spinning_fish.scale = Vector2(0.42, 0.42)
+
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	is_on_bar = true
@@ -107,7 +135,10 @@ func _on_timer_timeout() -> void:
 
 		fish_count += 1
 		%FishCounter.text = str(fish_count) + " Fih"
-
+		
+		if fish_count == 1:
+			spawn_spinning_fish_next_cast = true
+		
 		end_fishing()
 
 	elif %TextureProgressBar.value <= 0:

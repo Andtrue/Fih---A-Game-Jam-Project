@@ -223,17 +223,12 @@ animations = [{
 
 [node name="TalkingFih" type="Node2D" unique_id=91736149]
 script = ExtResource("1_w50a3")
-message_chance = null
-message_interval = null
-minimum_speed = null
-maximum_speed = null
-cycle_duration = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=574559125]
 sprite_frames = SubResource("SpriteFrames_e8hal")
 animation = &"spin"
 autoplay = "spin"
-frame_progress = 0.723605
+frame_progress = 0.35437554
 
 [node name="Timer" type="Timer" parent="." unique_id=6838195]
 

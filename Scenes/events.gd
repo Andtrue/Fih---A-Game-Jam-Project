@@ -1,6 +1,6 @@
 extends Node
 
-const EVENT1 := preload("res://Data/Events/scissors.tscn")
+const EVENT1 := preload("res://Data/Events/fih_spit.tscn")
 const EVENT2 := preload("res://Data/Events/seagull.tscn")
 const EVENT3 := preload("res://Data/Events/slip.tscn")
 
