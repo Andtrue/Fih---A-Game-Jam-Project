@@ -108,6 +108,7 @@ func _on_timer_timeout() -> void:
 		%TextureProgressBar.value -= 3
 	if %TextureProgressBar.value >= 100:
 		print("fish caught")
+		$WinSFX.play()
 		fish_count += 1
 		GameState.fish_count = fish_count # ADDED
 		%FishCounter.text = str(fish_count) + " Fih"
@@ -133,5 +134,6 @@ func _on_timer_timeout() -> void:
 		end_fishing()
 	elif %TextureProgressBar.value <= 0:
 		print("fish escaped")
+		$LoseSFX.play()
 		%CastPrompt.text = "FISH ESCAPED!" # ADDED
 		end_fishing()
