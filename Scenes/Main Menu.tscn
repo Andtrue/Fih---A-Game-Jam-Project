@@ -2,14 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://dkqlgwllcrsov" path="res://Assets/Start Screen/Temp background.png" id="1_aire5"]
 [ext_resource type="Script" uid="uid://cor2wyemwu42h" path="res://Scenes/main_menu.gd" id="1_r7rhf"]
-[ext_resource type="AudioStream" uid="uid://x452amtb4f8t" path="res://Assets/SFX/Fih Theme.mp3" id="2_56txt"]
+[ext_resource type="AudioStream" uid="uid://ctp0xdgiw0aln" path="res://Assets/SFX/Fih Theme.mp3" id="2_56txt"]
 
 [node name="MainMenu" type="Node2D" unique_id=184303805]
 script = ExtResource("1_r7rhf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=433568977]
-position = Vector2(637.0001, 325)
-scale = Vector2(0.91810346, 0.79620564)
+position = Vector2(650.00006, 374.875)
+scale = Vector2(0.93678147, 0.91829866)
 texture = ExtResource("1_aire5")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1012158439]

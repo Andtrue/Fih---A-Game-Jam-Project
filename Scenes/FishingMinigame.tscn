@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c4yvmuqhap0ga" path="res://Assets/Fishing Assets/Moving Bar.png" id="3_7cp3m"]
 [ext_resource type="Script" uid="uid://bscaibpkl4pbn" path="res://Scenes/rigid_body_2d.gd" id="3_pevav"]
 [ext_resource type="Texture2D" uid="uid://2iiggj6bsae8" path="res://Assets/Fishing Assets/Temp Fish Bobber.png" id="4_pevav"]
-[ext_resource type="AudioStream" uid="uid://x452amtb4f8t" path="res://Assets/SFX/Fih Theme.mp3" id="6_pevav"]
+[ext_resource type="AudioStream" uid="uid://ctp0xdgiw0aln" path="res://Assets/SFX/Fih Theme.mp3" id="6_pevav"]
 [ext_resource type="Script" uid="uid://bnwo1nnngcqo3" path="res://Scenes/fish.gd" id="8_80aay"]
 [ext_resource type="Texture2D" uid="uid://u763gcbywliw" path="res://Assets/Fishing Assets/Progress Frame.png" id="8_431do"]
 [ext_resource type="Texture2D" uid="uid://daii35xgpjjav" path="res://Assets/Fishing Assets/Progress Bar.png" id="9_80aay"]
@@ -98,14 +98,33 @@ texture_progress = ExtResource("9_80aay")
 
 [node name="Timer" type="Timer" parent="." unique_id=1192790809]
 wait_time = 0.2
-autostart = true
 
 [node name="Node" type="Node" parent="." unique_id=624518649]
 script = ExtResource("11_80aay")
 
 [node name="EventTimer" type="Timer" parent="Node" unique_id=1383912776]
+autostart = true
+
+[node name="CastPrompt" type="Label" parent="." unique_id=1613450791]
+unique_name_in_owner = true
+offset_top = -62.03
+offset_right = 310.0
+offset_bottom = 54.97003
+scale = Vector2(0.34, 0.34)
+theme_override_constants/line_spacing = -21
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 50
+text = "Press Space
+To Cast"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="FishingStartTimer" type="Timer" parent="." unique_id=1176857955]
 
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="Fish" method="_on_timer_timeout"]
+[connection signal="timeout" from="FishingStartTimer" to="." method="_on_fishing_start_timer_timeout"]

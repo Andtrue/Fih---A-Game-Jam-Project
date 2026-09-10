@@ -10,58 +10,83 @@ const EVENTS: Array[PackedScene] = [
 	EVENT3
 ]
 
-@export var event_timer : float = randf_range(5,15)
-@export_range(0.0,1.0) var event_chance : float = 1	# chance for an event (currently 100%)
+@export_range(0.0, 1.0) var event_chance : float = 1
 
 @onready var timer = $EventTimer
 
 var active_event: AcceptDialog
 
+
 func _ready():
-	timer.wait_time = event_timer
-	#timer.one_shot = true		# use if you want only 1 event to play in the scene
+	timer.wait_time = randf_range(7, 10)
 	timer.timeout.connect(_on_timer_timeout)
+
+	print("EVENT SYSTEM READY")
+
+
+func start_events():
+	print("STARTING EVENT TIMER")
 	timer.start()
 
+
+func stop_events():
+	timer.stop()
+
+
 func roll_event():
-	# don't play another event if one is active
+	print("EVENT TIMER FIRED")
+
 	if is_instance_valid(active_event):
+		print("EVENT ALREADY ACTIVE")
 		return
-	
+
 	var roll = randf_range(0.0, 1.0)
-	if(roll <= event_chance):
+
+	print("EVENT ROLL: ", roll)
+
+	if roll <= event_chance:
 		play_event()
 	else:
+		print("EVENT FAILED ROLL")
 		timer.start()
 
+
 func play_event():
-	var selected_event = EVENTS.pick_random()	# pick random event
-	active_event = selected_event.instantiate()	# instantiate scene
-	add_child(active_event)	# add to scene tree
-	
-	#delete popup when pressing ok
+	print("PLAYING EVENT")
+
+	timer.stop()
+
+	var selected_event = EVENTS.pick_random()
+
+	active_event = selected_event.instantiate()
+	add_child(active_event)
+
 	active_event.confirmed.connect(_on_event_finished.bind(active_event))
-	
-	show_event_at_random_position(active_event)	# show the event
-	
+
+	show_event_at_random_position(active_event)
+
+
 func _on_event_finished(event: AcceptDialog):
 	if is_instance_valid(event):
 		event.queue_free()
-		
+
 	if active_event == event:
 		active_event = null
+		
+	timer.wait_time = randf_range(7, 10)
+	timer.start()
+
 
 func show_event_at_random_position(event: AcceptDialog) -> void:
-	# Open the popup so Godot calculates its size.
 	event.popup()
 
 	var viewport_size := Vector2i(
 		get_viewport().get_visible_rect().size
 	)
+
 	var popup_size := event.size
 	var margin := 20
 
-	# Calculate the furthest position that keeps the popup onscreen.
 	var max_x: int = maxi(
 		margin,
 		viewport_size.x - popup_size.x - margin
@@ -72,11 +97,11 @@ func show_event_at_random_position(event: AcceptDialog) -> void:
 		viewport_size.y - popup_size.y - margin
 	)
 
-	# Assign a random position.
 	event.position = Vector2i(
 		randi_range(margin, max_x),
 		randi_range(margin, max_y)
 	)
+
 
 func _on_timer_timeout():
 	roll_event()
