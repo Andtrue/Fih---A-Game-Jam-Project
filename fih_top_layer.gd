@@ -2,13 +2,23 @@ extends CanvasLayer
 
 const FISH_SCENES: Array[PackedScene] = [
 	preload("res://Data/Events/talking_fih.tscn"),
-	preload("res://Data/Events/talking_fih_2.tscn")
+	preload("res://Data/Events/talking_fih_2.tscn"),
+	preload("res://Data/Events/talking_fih_3.tscn"),
+	preload("res://Data/Events/talking_fih_4.tscn"),
+	preload("res://Data/Events/talking_fih_5.tscn"),
+	preload("res://Data/Events/talking_fih_6.tscn"),
+	preload("res://Data/Events/talking_fih_7.tscn")
 ]
 
-# Screen positions for fish 1 and fish 2.
+# Screen positions for fih
 const FISH_POSITIONS: Array[Vector2] = [
 	Vector2(150, 150),
-	Vector2(150, 400)
+	Vector2(150, 375),
+	Vector2(150, 600),
+	Vector2(625, 150),
+	Vector2(625, 375),
+	Vector2(625, 600),
+	Vector2(950, 375)
 ]
 
 var spawned_fish: Dictionary = {}

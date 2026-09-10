@@ -1,12 +1,5 @@
 extends Node2D
 
-const SPINNING_FISH_SCENES: Array[PackedScene] = [
-	preload("res://Data/Events/talking_fih.tscn"),
-	preload("res://Data/Events/talking_fih_2.tscn")
-]
-
-var spinning_fish: Node2D
-
 var is_on_bar = false
 var is_fishing = false
 var fish_count = 0
@@ -54,10 +47,6 @@ func _input(event: InputEvent) -> void:
 func start_cast() -> void:
 	# Prevent another cast while waiting
 	is_fishing = true
-
-	#if GameState.pending_spinning_fish > 0:
-		#spawn_spinning_fish(GameState.pending_spinning_fish)
-		#GameState.pending_spinning_fish = 0
 		
 	%TextureProgressBar.value = 30
 	
@@ -102,32 +91,6 @@ func _return_to_cast() -> void: # ADDED
 	await get_tree().create_timer(return_delay).timeout # ADDED
 	get_tree().change_scene_to_file(cast_scene) # ADDED
 
-func spawn_spinning_fish(fish_number: int) -> void:
-	# Convert fish numbers 1–4 into array indexes 0–3.
-	var scene_index: int = fish_number - 1
-
-	if scene_index < 0 or scene_index >= SPINNING_FISH_SCENES.size():
-		push_error("No spinning fish scene for fish number: " + str(fish_number))
-		return
-
-	if is_instance_valid(spinning_fish):
-		spinning_fish.queue_free()
-		spinning_fish = null
-
-	var selected_scene: PackedScene = SPINNING_FISH_SCENES[scene_index]
-	spinning_fish = selected_scene.instantiate() as Node2D
-
-	if spinning_fish == null:
-		push_error("Spinning fish scene root must be a Node2D.")
-		return
-
-	spinning_fish.name = "SpinningFish"
-	add_child(spinning_fish)
-
-	spinning_fish.position = Vector2(-45, -25)
-	spinning_fish.scale = Vector2(0.42, 0.42)
-
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	is_on_bar = true
 
@@ -146,7 +109,7 @@ func _on_timer_timeout() -> void:
 		fish_count += 1
 		GameState.fish_count = fish_count # ADDED
 		%FishCounter.text = str(fish_count) + " Fih"
-		FihTopLayer.spawn_fish(fish_count)
+		FihTopLayer.spawn_fish(fish_count)			# To change the fih spawn thresholds, put inside if and elif statements
 		
 		%CastPrompt.text = "FISH CAUGHT!" # ADDED
 		end_fishing()
