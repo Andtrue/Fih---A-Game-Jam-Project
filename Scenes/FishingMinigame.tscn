@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://kk8xi78n1ek0" path="res://Data/fish/pike.tres" id="15_ll42e"]
 [ext_resource type="Resource" uid="uid://blf1oq2ucpsnv" path="res://Data/fish/minnow.tres" id="16_axes7"]
 [ext_resource type="Resource" uid="uid://cvn6kepvy8vto" path="res://Data/fish/golden_fish.tres" id="17_iwx3l"]
+[ext_resource type="Texture2D" uid="uid://yn5t7ctxnv4e" path="res://Assets/Rod/Stih.png" id="17_t51q7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
 size = Vector2(7.399994, 96.60002)
@@ -135,6 +136,12 @@ text = "0 Fih"
 [node name="FishManager" type="Node" parent="." unique_id=1504383881]
 script = ExtResource("12_t51q7")
 all_fish = Array[ExtResource("13_fstn3")]([ExtResource("14_4ohcb"), ExtResource("15_ll42e"), ExtResource("16_axes7"), ExtResource("17_iwx3l")])
+
+[node name="Stih" type="Sprite2D" parent="." unique_id=462530563]
+position = Vector2(101.799995, 36)
+rotation = -0.18675023
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("17_t51q7")
 
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
