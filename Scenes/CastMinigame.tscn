@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bcit786cqha31" path="res://Assets/SFX/Nice 1.wav" id="7_vyk76"]
 [ext_resource type="AudioStream" uid="uid://bl7jr2vsoag0o" path="res://Assets/SFX/Perfect Cast.wav" id="8_k347l"]
 [ext_resource type="Texture2D" uid="uid://drtw8g1cgamnm" path="res://Assets/Fishing Assets/fishingrod.png" id="8_vyk76"]
+[ext_resource type="Texture2D" uid="uid://d1gdoi030hb4x" path="res://Assets/Rod/Bait.png" id="9_k347l"]
 [ext_resource type="Texture2D" uid="uid://u763gcbywliw" path="res://Assets/Fishing Assets/Progress Frame.png" id="9_mcyfq"]
 [ext_resource type="Texture2D" uid="uid://daii35xgpjjav" path="res://Assets/Fishing Assets/Progress Bar.png" id="10_l5vv2"]
 
@@ -13,6 +14,9 @@
 position = Vector2(400, 300)
 scale = Vector2(5, 5)
 script = ExtResource("1_o7xl2")
+idle_hang = 90.0
+land_near_offset = Vector2(0, 400)
+land_far_offset = Vector2(-450, 90)
 
 [node name="Background" type="TextureRect" parent="." unique_id=1009588292]
 offset_left = -80.0
@@ -103,7 +107,25 @@ text = "0 Fih"
 
 [node name="FishingRod" type="Sprite2D" parent="." unique_id=1866475261]
 unique_name_in_owner = true
-position = Vector2(67.600006, 75.999985)
+position = Vector2(110.20001, 76)
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("8_vyk76")
 offset = Vector2(-200, -600)
+
+[node name="Tip" type="Marker2D" parent="FishingRod" unique_id=1221708245]
+unique_name_in_owner = true
+position = Vector2(-286.6665, -1279.9998)
+scale = Vector2(16.666668, 16.666668)
+
+[node name="Bait" type="Sprite2D" parent="." unique_id=1476371444]
+unique_name_in_owner = true
+position = Vector2(50.800003, 38.8)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("9_k347l")
+
+[node name="FishingLine" type="Line2D" parent="." unique_id=2075588817]
+unique_name_in_owner = true
+position = Vector2(7.6293945e-06, 0)
+scale = Vector2(0.9999998, 0.9999998)
+width = 2.0
+default_color = Color(0.8, 0.8, 0.8, 1)

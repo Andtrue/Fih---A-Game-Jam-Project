@@ -17,14 +17,22 @@ signal bite
 @export var fade_time: float = 0.5
 @export var fishing_scene: String = "res://Scenes/FishingMinigame.tscn"
 # --- rod animation (degrees / seconds) ---
-@export var windup_angle: float = 70.0      # tilt to the side while holding
+@export var windup_angle: float = 70.0
 @export var windup_time: float = 0.3
-@export var whip_angle: float = 60.0        # angle at the moment of the whip
-@export var whip_skew: float = 20.0         # lean that sells "forward"
-@export var whip_squash: float = 0.45       # scale.y multiplier at the whip; lower = further
+@export var whip_angle: float = 60.0
+@export var whip_skew: float = 20.0
+@export var whip_squash: float = 0.45
 @export var whip_time: float = 0.1
 @export var settle_time: float = 0.15
 @export var return_time: float = 0.35
+# --- line and bait ---
+@export var idle_hang: float = 60.0                      # px the bait dangles below the tip when idle
+@export var land_near_offset: Vector2 = Vector2(-150, 120)  # 0 cast: offset from idle tip (negative x = left)
+@export var land_far_offset: Vector2 = Vector2(-450, -40)   # 100 cast: offset from idle tip
+@export var line_width: float = 2.0
+@export var line_color: Color = Color(0.9, 0.9, 0.9)
+@export var line_sag: float = 25.0
+@export var fly_time: float = 0.45
 var power := 0.0
 var charging := false
 var lagging := false
@@ -33,9 +41,22 @@ var locked := false
 var cast_id := 0
 var blink_tween: Tween
 var rod_tween: Tween
+var bait_tween: Tween
 var rod_base_scale: Vector2
+var tip_idle: Vector2
+var line_end: Vector2
+var bait_in_water := false
 func _ready() -> void:
 	rod_base_scale = %FishingRod.scale
+	tip_idle = %Tip.global_position
+	# draw order: line under rod, bait on top
+	%FishingLine.top_level = true
+	%FishingLine.position = Vector2.ZERO
+	%FishingLine.z_index = 1
+	%FishingLine.width = line_width
+	%FishingLine.default_color = line_color
+	%FishingRod.z_index = 2
+	%Bait.z_index = 3
 	%FishCounter.text = str(GameState.fish_count) + " Fih"
 	%Fade.modulate.a = 0.0
 	_reset_for_cast()
@@ -48,8 +69,10 @@ func _reset_for_cast() -> void:
 	%TextureProgressBar.value = 0
 	%DistanceLabel.text = ""
 	_rod_reset()
+	_bait_reset()
 	_set_prompt("Hold SPACE to cast", idle_blink_speed)
 func _process(delta: float) -> void:
+	_update_line()
 	if not (charging or lagging):
 		return
 	var speed := fill_speed
@@ -93,6 +116,7 @@ func _overshoot() -> void:
 	_finish(overshoot_distance)
 func _finish(distance: float) -> void:
 	_rod_cast()
+	_bait_cast(distance)
 	print("cast distance: ", distance)
 	GameState.cast_distance = distance
 	%DistanceLabel.text = "Cast: %d / 100  %s" % [int(distance), _rating(distance)]
@@ -139,12 +163,10 @@ func _rod_reset() -> void:
 	%FishingRod.rotation = 0.0
 	%FishingRod.skew = 0.0
 func _rod_windup() -> void:
-	# Tilt to the side while the player holds.
 	_rod_kill()
 	rod_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	rod_tween.tween_property(%FishingRod, "rotation", deg_to_rad(windup_angle), windup_time)
 func _rod_cast() -> void:
-	# Whip forward (skew + squash), settle, then lift back to vertical.
 	_rod_kill()
 	rod_tween = create_tween()
 	rod_tween.set_parallel(true)
@@ -157,6 +179,32 @@ func _rod_cast() -> void:
 	rod_tween.tween_property(%FishingRod, "rotation", 0.0, return_time).set_ease(Tween.EASE_IN_OUT)
 	rod_tween.tween_property(%FishingRod, "skew", 0.0, return_time).set_ease(Tween.EASE_IN_OUT)
 	rod_tween.tween_property(%FishingRod, "scale:y", rod_base_scale.y, return_time).set_ease(Tween.EASE_IN_OUT)
+# --- line and bait ---
+func _bait_kill() -> void:
+	if bait_tween:
+		bait_tween.kill()
+		bait_tween = null
+func _bait_reset() -> void:
+	_bait_kill()
+	bait_in_water = false
+	%Bait.visible = true
+func _bait_cast(distance: float) -> void:
+	_bait_kill()
+	var t: float = clampf(distance / 100.0, 0.0, 1.0)
+	var target := tip_idle + land_near_offset.lerp(land_far_offset, t)
+	GameState.line_end = target
+	line_end = %Tip.global_position + Vector2(0, idle_hang)
+	bait_in_water = true
+	bait_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	bait_tween.tween_property(self, "line_end", target, fly_time)
+	bait_tween.tween_callback(func(): %Bait.visible = false)
+func _update_line() -> void:
+	var a: Vector2 = %Tip.global_position
+	if not bait_in_water:
+		line_end = a + Vector2(0, idle_hang)
+	var mid := (a + line_end) * 0.5 + Vector2(0, line_sag)
+	%FishingLine.points = PackedVector2Array([a, mid, line_end])
+	%Bait.global_position = line_end
 # --- prompt helpers ---
 func _set_prompt(text: String, blink_speed: float = 0.0) -> void:
 	_stop_blink()
