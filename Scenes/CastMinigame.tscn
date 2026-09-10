@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://ckbtx45s0lamh"]
+
+[ext_resource type="Script" uid="uid://cxfta7am2t84e" path="res://Scenes/cast_minigame.gd" id="1_o7xl2"]
+[ext_resource type="AudioStream" uid="uid://ctp0xdgiw0aln" path="res://Assets/SFX/Fih Theme.mp3" id="2_ntmju"]
+[ext_resource type="Texture2D" uid="uid://bwi8netdhpuu" path="res://Assets/Fishing Assets/fishing background.png" id="3_887yb"]
+[ext_resource type="Texture2D" uid="uid://vp6lskd4nqqi" path="res://Assets/Fishing Assets/Fishing Bar.png" id="4_rrjas"]
+[ext_resource type="AudioStream" uid="uid://bcit786cqha31" path="res://Assets/SFX/Nice 1.wav" id="7_vyk76"]
+[ext_resource type="AudioStream" uid="uid://bl7jr2vsoag0o" path="res://Assets/SFX/Perfect Cast.wav" id="8_k347l"]
+[ext_resource type="Texture2D" uid="uid://u763gcbywliw" path="res://Assets/Fishing Assets/Progress Frame.png" id="9_mcyfq"]
+[ext_resource type="Texture2D" uid="uid://daii35xgpjjav" path="res://Assets/Fishing Assets/Progress Bar.png" id="10_l5vv2"]
+
+[node name="CastMiniGame" type="Node2D" unique_id=1015336884]
+position = Vector2(400, 300)
+scale = Vector2(5, 5)
+script = ExtResource("1_o7xl2")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=291997540]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="FihTheme" type="AudioStreamPlayer" parent="AudioListener2D" unique_id=365914012]
+stream = ExtResource("2_ntmju")
+volume_db = -21.606
+autoplay = true
+
+[node name="Background" type="TextureRect" parent="." unique_id=1009588292]
+offset_left = -80.0
+offset_top = -60.000004
+offset_right = 175.99998
+offset_bottom = 83.999985
+offset_transform_enabled = true
+texture = ExtResource("3_887yb")
+expand_mode = 2
+
+[node name="Outside" type="Sprite2D" parent="." unique_id=914871814]
+texture = ExtResource("4_rrjas")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=353945104]
+unique_name_in_owner = true
+z_index = 10
+offset_left = -49.399998
+offset_top = -49.2
+offset_right = 50.600002
+offset_bottom = 50.8
+fill_mode = 3
+texture_under = ExtResource("9_mcyfq")
+texture_progress = ExtResource("10_l5vv2")
+
+[node name="CastPrompt" type="Label" parent="." unique_id=1481253469]
+unique_name_in_owner = true
+offset_left = 31.200005
+offset_top = -54.0
+offset_right = 341.2
+offset_bottom = 63.00003
+scale = Vector2(0.34, 0.34)
+theme_override_constants/line_spacing = 2
+theme_override_constants/paragraph_spacing = 2
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 30
+text = "Press Space
+To Cast"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="DistanceLabel" type="Label" parent="." unique_id=167469839]
+unique_name_in_owner = true
+offset_left = -50.000015
+offset_top = 56.400005
+offset_right = 260.0
+offset_bottom = 173.40004
+scale = Vector2(0.34, 0.34)
+theme_override_constants/line_spacing = -21
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 21
+text = "Press Space
+To Cast"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="NiceSound" type="AudioStreamPlayer2D" parent="." unique_id=1737999302]
+unique_name_in_owner = true
+stream = ExtResource("7_vyk76")
+
+[node name="PerfectSound" type="AudioStreamPlayer2D" parent="." unique_id=1268572976]
+unique_name_in_owner = true
+stream = ExtResource("8_k347l")
+
+[node name="Fade" type="ColorRect" parent="." unique_id=183216986]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
