@@ -34,8 +34,11 @@ func _ready() -> void:
 	if fish: # ADDED
 		GameState.current_fish = fish # ADDED
 		print("hooked: ", fish.fish_name, " difficulty ", fish.difficulty) # ADDED
-		$Fish.move_distance = 20 + fish.difficulty * 0.6 # ADDED
-		$Fish.move_time = 0.6 - fish.difficulty * 0.004 # ADDED
+		
+		#the commend code below I put in case we want to adjust difficulty based on the fish type
+		
+		#$Fish.move_distance = 20 + fish.difficulty * 0.6 # ADDED
+		#$Fish.move_time = 0.6 - fish.difficulty * 0.004 # ADDED
 	start_cast() # ADDED
 func _input(event: InputEvent) -> void:
 	if leaving: # ADDED
