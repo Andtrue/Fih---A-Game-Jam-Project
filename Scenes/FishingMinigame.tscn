@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://blf1oq2ucpsnv" path="res://Data/fish/minnow.tres" id="16_axes7"]
 [ext_resource type="Resource" uid="uid://cvn6kepvy8vto" path="res://Data/fish/golden_fish.tres" id="17_iwx3l"]
 [ext_resource type="Texture2D" uid="uid://yn5t7ctxnv4e" path="res://Assets/Rod/Stih.png" id="17_t51q7"]
+[ext_resource type="AudioStream" uid="uid://cmjmrydl1fogq" path="res://Assets/SFX/Final Fantasy 7 Remake Victory Fanfare - Sound effects HD _ sfx _ No copyright ( download Link ).mp3" id="18_4ohcb"]
 [ext_resource type="AudioStream" uid="uid://cq1deloxy3ec3" path="res://Assets/SFX/Fishing Reel High.mp3" id="18_fstn3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7ym8"]
@@ -148,6 +149,10 @@ texture = ExtResource("17_t51q7")
 oversampling_override = 1.0
 title = "All fih caught!"
 ok_button_text = "Continue?"
+
+[node name="GameEndSFX" type="AudioStreamPlayer" parent="GameEnd" unique_id=515834662]
+stream = ExtResource("18_4ohcb")
+volume_db = -16.791
 
 [node name="ReelSFX" type="AudioStreamPlayer2D" parent="." unique_id=619363942]
 stream = ExtResource("18_fstn3")

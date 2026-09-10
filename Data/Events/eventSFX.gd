@@ -11,6 +11,7 @@ const SFX: Array[AudioStream] = [
 	preload("res://Assets/SFX/Laugh (genuine) 2.wav"),
 	preload("res://Assets/SFX/Laugh (mocking) 1.wav"),
 	preload("res://Assets/SFX/Laugh (mocking) 2.wav"),
+	preload("res://Assets/SFX/metal pipe falling sound effect 4.mp3"),
 	preload("res://Assets/SFX/Sorry 1.wav"),
 	preload("res://Assets/SFX/Sorry 2.wav"),
 	preload("res://Assets/SFX/Trash 1.wav"),

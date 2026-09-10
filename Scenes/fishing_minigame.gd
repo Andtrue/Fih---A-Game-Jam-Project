@@ -119,6 +119,7 @@ func _on_timer_timeout() -> void:
 			$FishingStartTimer.stop()
 			var final_time: float = GameState.get_fishing_time()
 			$GameEnd.dialog_text = ("You fished for %.1f seconds" % final_time)
+			$GameEnd/GameEndSFX.play()
 			$GameEnd.popup_centered()
 			
 			await $GameEnd.confirmed
