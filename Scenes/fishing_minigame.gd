@@ -1,6 +1,9 @@
 extends Node2D
 
-const SPINNING_FISH_SCENE: PackedScene = preload("res://Data/Events/talking_fih.tscn")
+const SPINNING_FISH_SCENES: Array[PackedScene] = [
+	preload("res://Data/Events/talking_fih.tscn"),
+	preload("res://Data/Events/talking_fih_2.tscn")
+]
 
 var spinning_fish: Node2D
 
@@ -10,6 +13,7 @@ var fish_count = 0
 var leaving = false # ADDED
 @export var cast_scene: String = "res://Scenes/CastMinigame.tscn" # ADDED
 @export var return_delay: float = 2.0 # ADDED
+
 func _ready() -> void:
 	# Stop all timers at the beginning
 	$Timer.stop()
@@ -40,19 +44,20 @@ func _ready() -> void:
 		#$Fish.move_distance = 20 + fish.difficulty * 0.6 # ADDED
 		#$Fish.move_time = 0.6 - fish.difficulty * 0.004 # ADDED
 	start_cast() # ADDED
+
 func _input(event: InputEvent) -> void:
 	if leaving: # ADDED
 		return # ADDED
 	if event.is_action_pressed("ui_accept") and !is_fishing:
 		start_cast()
+
 func start_cast() -> void:
 	# Prevent another cast while waiting
 	is_fishing = true
 
-	# Spawn fish when fishing begins again after the first catch.
-	if GameState.spawn_spinning_fish_next_cast: # CHANGED: flag moved to GameState so it survives scene reload
-		spawn_spinning_fish()
-		GameState.spawn_spinning_fish_next_cast = false # CHANGED
+	#if GameState.pending_spinning_fish > 0:
+		#spawn_spinning_fish(GameState.pending_spinning_fish)
+		#GameState.pending_spinning_fish = 0
 		
 	%TextureProgressBar.value = 30
 	
@@ -64,6 +69,7 @@ func start_cast() -> void:
 	%TextureProgressBar.show()
 	# Start the 1 second delay
 	$FishingStartTimer.start()
+	
 func _on_fishing_start_timer_timeout() -> void:
 	# The 1 second delay is over.
 	# Now actual fishing starts.
@@ -72,6 +78,7 @@ func _on_fishing_start_timer_timeout() -> void:
 	$Fish.process_mode = Node.PROCESS_MODE_INHERIT
 	$Timer.start()
 	$Node.start_events()
+
 func end_fishing() -> void:
 	is_fishing = false
 	# Stop all fishing systems
@@ -89,17 +96,26 @@ func end_fishing() -> void:
 	# Show cast prompt
 	%CastPrompt.show()
 	_return_to_cast() # ADDED
+
 func _return_to_cast() -> void: # ADDED
 	leaving = true # ADDED
 	await get_tree().create_timer(return_delay).timeout # ADDED
 	get_tree().change_scene_to_file(cast_scene) # ADDED
 
-func spawn_spinning_fish() -> void:
-	# Prevent more than one from being created.
-	if is_instance_valid(spinning_fish):
+func spawn_spinning_fish(fish_number: int) -> void:
+	# Convert fish numbers 1–4 into array indexes 0–3.
+	var scene_index: int = fish_number - 1
+
+	if scene_index < 0 or scene_index >= SPINNING_FISH_SCENES.size():
+		push_error("No spinning fish scene for fish number: " + str(fish_number))
 		return
 
-	spinning_fish = SPINNING_FISH_SCENE.instantiate() as Node2D
+	if is_instance_valid(spinning_fish):
+		spinning_fish.queue_free()
+		spinning_fish = null
+
+	var selected_scene: PackedScene = SPINNING_FISH_SCENES[scene_index]
+	spinning_fish = selected_scene.instantiate() as Node2D
 
 	if spinning_fish == null:
 		push_error("Spinning fish scene root must be a Node2D.")
@@ -108,15 +124,16 @@ func spawn_spinning_fish() -> void:
 	spinning_fish.name = "SpinningFish"
 	add_child(spinning_fish)
 
-	# Change this to the desired position.
 	spinning_fish.position = Vector2(-45, -25)
 	spinning_fish.scale = Vector2(0.42, 0.42)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	is_on_bar = true
+
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	is_on_bar = false
+
 func _on_timer_timeout() -> void:
 	if !is_fishing:
 		return
@@ -129,9 +146,7 @@ func _on_timer_timeout() -> void:
 		fish_count += 1
 		GameState.fish_count = fish_count # ADDED
 		%FishCounter.text = str(fish_count) + " Fih"
-		
-		if fish_count == 1:
-			GameState.spawn_spinning_fish_next_cast = true # CHANGED: was local var
+		FihTopLayer.spawn_fish(fish_count)
 		
 		%CastPrompt.text = "FISH CAUGHT!" # ADDED
 		end_fishing()

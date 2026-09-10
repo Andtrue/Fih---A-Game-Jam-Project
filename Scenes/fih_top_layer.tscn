@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bwxrfhlh26mkd"]
+
+[ext_resource type="Script" uid="uid://cvpdvj4e2uyuo" path="res://fih_top_layer.gd" id="1_y1g4t"]
+
+[node name="FihTopLayer" type="CanvasLayer" unique_id=1070320954]
+script = ExtResource("1_y1g4t")
+
+[node name="Fih1Spawn" type="Marker2D" parent="." unique_id=94839720]
+
+[node name="Fih2Spawn" type="Marker2D" parent="." unique_id=345277211]
