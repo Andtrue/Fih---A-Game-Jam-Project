@@ -2,7 +2,7 @@ extends Node2D
 
 var is_on_bar = false
 var is_fishing = false
-
+var fish_count = 0
 
 func _ready() -> void:
 	# Stop all timers at the beginning
@@ -104,6 +104,10 @@ func _on_timer_timeout() -> void:
 
 	if %TextureProgressBar.value >= 100:
 		print("fish caught")
+
+		fish_count += 1
+		%FishCounter.text = str(fish_count) + " Fih"
+
 		end_fishing()
 
 	elif %TextureProgressBar.value <= 0:

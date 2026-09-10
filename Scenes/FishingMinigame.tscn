@@ -123,6 +123,18 @@ uppercase = true
 
 [node name="FishingStartTimer" type="Timer" parent="." unique_id=1176857955]
 
+[node name="FishCounter" type="Label" parent="." unique_id=1966900464]
+unique_name_in_owner = true
+offset_left = 62.600006
+offset_top = 18.000002
+offset_right = 256.6
+offset_bottom = 134.0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.145, 0.145)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 85
+text = "0 Fih"
+
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
