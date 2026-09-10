@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://brutxh70fob67"]
 
-[ext_resource type="Texture2D" uid="uid://dkqlgwllcrsov" path="res://Assets/Start Screen/Temp background.png" id="1_aire5"]
 [ext_resource type="Script" uid="uid://cor2wyemwu42h" path="res://Scenes/main_menu.gd" id="1_r7rhf"]
+[ext_resource type="Texture2D" uid="uid://d0npxyqhrh78f" path="res://Assets/Start Screen/main_menu.png" id="2_ur25d"]
 [ext_resource type="FontFile" uid="uid://hrj82aheptd3" path="res://Assets/Font/Handlee-Regular.ttf" id="3_ur25d"]
 
 [node name="MainMenu" type="Node2D" unique_id=184303805]
 script = ExtResource("1_r7rhf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=433568977]
-position = Vector2(650.00006, 374.875)
-scale = Vector2(0.93678147, 0.91829866)
-texture = ExtResource("1_aire5")
+position = Vector2(638.5, 361)
+scale = Vector2(0.7643885, 0.76677316)
+texture = ExtResource("2_ur25d")
 
 [node name="Start" type="Button" parent="." unique_id=1092382283]
 offset_left = 613.0
@@ -21,6 +21,7 @@ theme_override_font_sizes/font_size = 58
 text = "Start"
 
 [node name="Label" type="Label" parent="." unique_id=1260534933]
+visible = false
 offset_left = 5.0
 offset_top = 554.0
 offset_right = 509.0
