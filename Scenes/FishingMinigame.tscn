@@ -158,16 +158,16 @@ volume_db = -16.791
 
 [node name="ReelSFX" type="AudioStreamPlayer2D" parent="." unique_id=619363942]
 stream = ExtResource("18_fstn3")
-volume_db = -6.803
+volume_db = -10.691
 
 [node name="WinSFX" type="AudioStreamPlayer2D" parent="." unique_id=1457191265]
 stream = ExtResource("20_axes7")
-volume_db = -6.804
+volume_db = -1.944
 
 [node name="LoseSFX" type="AudioStreamPlayer2D" parent="." unique_id=515061423]
 scale = Vector2(0.9999998, 0.9999998)
 stream = ExtResource("21_iwx3l")
-volume_db = -6.318
+volume_db = -1.458
 
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
