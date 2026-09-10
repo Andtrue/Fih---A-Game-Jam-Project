@@ -7,7 +7,7 @@ var spawn_spinning_fish_next_cast: bool = false
 var line_end: Vector2 = Vector2.ZERO
 
 var fishing_start_time: int = -1
-
+var current_fish_difficulty = 7.5
 
 func start_fishing_timer() -> void:
 	# Only record the first cast's time.

@@ -30,12 +30,12 @@ func _ready() -> void:
 	var fish: FishData = $FishManager.select_fish(GameState.cast_distance) # ADDED
 	if fish: # ADDED
 		GameState.current_fish = fish # ADDED
+		fish.difficulty = GameState.current_fish_difficulty
 		print("hooked: ", fish.fish_name, " difficulty ", fish.difficulty) # ADDED
-		
 		#the commend code below I put in case we want to adjust difficulty based on the fish type
 		
-		#$Fish.move_distance = 20 + fish.difficulty * 0.6 # ADDED
-		#$Fish.move_time = 0.6 - fish.difficulty * 0.004 # ADDED
+		$Fish.move_distance = 20 + fish.difficulty * 0.6 # ADDED
+		$Fish.move_time = 0.6 - fish.difficulty * 0.004 # ADDED
 	start_cast() # ADDED
 
 func _input(event: InputEvent) -> void:
@@ -112,7 +112,7 @@ func _on_timer_timeout() -> void:
 		GameState.fish_count = fish_count # ADDED
 		%FishCounter.text = str(fish_count) + " Fih"
 		FihTopLayer.spawn_fish(fish_count)			# To change the fih spawn thresholds, put inside if and elif statements
-		if fish_count == 2:		# Game win condition
+		if fish_count == 7:		# Game win condition
 			print("you win")
 			$Timer.stop()
 			$Node/EventTimer.stop()
@@ -124,9 +124,10 @@ func _on_timer_timeout() -> void:
 			await $GameEnd.confirmed
 			
 			%CastPrompt.text = "FISH CAUGHT!" # ADDED
+			GameState.current_fish_difficulty += 7.5
 			end_fishing()
 			return
-			
+		GameState.current_fish_difficulty += 7.5
 		%CastPrompt.text = "FISH CAUGHT!" # ADDED
 		end_fishing()
 	elif %TextureProgressBar.value <= 0:
