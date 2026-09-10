@@ -1,8 +1,6 @@
 extends Node2D
-
 signal cast_finished(distance: float)
 signal bite
-
 # --- tuning ---
 @export var fill_speed: float = 90.0
 @export var twitchy_above: float = 85.0
@@ -18,21 +16,29 @@ signal bite
 @export var perfect_threshold: float = 98.0
 @export var fade_time: float = 0.5
 @export var fishing_scene: String = "res://Scenes/FishingMinigame.tscn"
-
+# --- rod animation (degrees / seconds) ---
+@export var windup_angle: float = 70.0      # tilt to the side while holding
+@export var windup_time: float = 0.3
+@export var whip_angle: float = 60.0        # angle at the moment of the whip
+@export var whip_skew: float = 20.0         # lean that sells "forward"
+@export var whip_squash: float = 0.45       # scale.y multiplier at the whip; lower = further
+@export var whip_time: float = 0.1
+@export var settle_time: float = 0.15
+@export var return_time: float = 0.35
 var power := 0.0
 var charging := false
 var lagging := false
 var waiting_for_bite := false
+var locked := false
 var cast_id := 0
 var blink_tween: Tween
-
-
+var rod_tween: Tween
+var rod_base_scale: Vector2
 func _ready() -> void:
+	rod_base_scale = %FishingRod.scale
 	%FishCounter.text = str(GameState.fish_count) + " Fih"
 	%Fade.modulate.a = 0.0
 	_reset_for_cast()
-
-
 func _reset_for_cast() -> void:
 	cast_id += 1
 	power = 0.0
@@ -41,9 +47,8 @@ func _reset_for_cast() -> void:
 	waiting_for_bite = false
 	%TextureProgressBar.value = 0
 	%DistanceLabel.text = ""
+	_rod_reset()
 	_set_prompt("Hold SPACE to cast", idle_blink_speed)
-
-
 func _process(delta: float) -> void:
 	if not (charging or lagging):
 		return
@@ -54,9 +59,9 @@ func _process(delta: float) -> void:
 	%TextureProgressBar.value = power
 	if power >= 100.0:
 		_overshoot()
-
-
 func _input(event: InputEvent) -> void:
+	if locked:
+		return
 	if event.is_action_pressed("cast"):
 		if waiting_for_bite:
 			print("RECAST?")
@@ -65,6 +70,7 @@ func _input(event: InputEvent) -> void:
 			charging = true
 			power = 0.0
 			_set_prompt("")
+			_rod_windup()
 	elif event.is_action_released("cast") and charging:
 		charging = false
 		lagging = true
@@ -74,8 +80,6 @@ func _input(event: InputEvent) -> void:
 			return
 		lagging = false
 		_finish(power)
-
-
 func _overshoot() -> void:
 	charging = false
 	lagging = false
@@ -87,9 +91,8 @@ func _overshoot() -> void:
 	if my_id != cast_id:
 		return
 	_finish(overshoot_distance)
-
-
 func _finish(distance: float) -> void:
+	_rod_cast()
 	print("cast distance: ", distance)
 	GameState.cast_distance = distance
 	%DistanceLabel.text = "Cast: %d / 100  %s" % [int(distance), _rating(distance)]
@@ -99,16 +102,12 @@ func _finish(distance: float) -> void:
 		%NiceSound.play()
 	cast_finished.emit(distance)
 	_wait_for_bite()
-
-
 func _rating(d: float) -> String:
 	if d >= perfect_threshold: return "Perfect"
 	if d >= nice_threshold: return "Nice"
 	if d >= 60.0: return "Good"
 	if d >= 30.0: return "Meh"
 	return "Weak"
-
-
 func _wait_for_bite() -> void:
 	var my_id := cast_id
 	waiting_for_bite = true
@@ -118,20 +117,46 @@ func _wait_for_bite() -> void:
 	await get_tree().create_timer(wait).timeout
 	if my_id != cast_id: return
 	waiting_for_bite = false
+	locked = true
 	_set_prompt("BITE!", bite_blink_speed)
 	print("BITE")
 	bite.emit()
 	_go_to_fishing()
-
-
 func _go_to_fishing() -> void:
 	await get_tree().create_timer(0.6).timeout
 	var t := create_tween()
 	t.tween_property(%Fade, "modulate:a", 1.0, fade_time)
 	await t.finished
 	get_tree().change_scene_to_file(fishing_scene)
-
-
+# --- rod animation ---
+func _rod_kill() -> void:
+	if rod_tween:
+		rod_tween.kill()
+		rod_tween = null
+func _rod_reset() -> void:
+	_rod_kill()
+	%FishingRod.scale = rod_base_scale
+	%FishingRod.rotation = 0.0
+	%FishingRod.skew = 0.0
+func _rod_windup() -> void:
+	# Tilt to the side while the player holds.
+	_rod_kill()
+	rod_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	rod_tween.tween_property(%FishingRod, "rotation", deg_to_rad(windup_angle), windup_time)
+func _rod_cast() -> void:
+	# Whip forward (skew + squash), settle, then lift back to vertical.
+	_rod_kill()
+	rod_tween = create_tween()
+	rod_tween.set_parallel(true)
+	rod_tween.tween_property(%FishingRod, "rotation", deg_to_rad(whip_angle), whip_time).set_ease(Tween.EASE_OUT)
+	rod_tween.tween_property(%FishingRod, "skew", deg_to_rad(whip_skew), whip_time).set_ease(Tween.EASE_OUT)
+	rod_tween.tween_property(%FishingRod, "scale:y", rod_base_scale.y * whip_squash, whip_time).set_ease(Tween.EASE_OUT)
+	rod_tween.set_parallel(false)
+	rod_tween.tween_interval(settle_time)
+	rod_tween.set_parallel(true)
+	rod_tween.tween_property(%FishingRod, "rotation", 0.0, return_time).set_ease(Tween.EASE_IN_OUT)
+	rod_tween.tween_property(%FishingRod, "skew", 0.0, return_time).set_ease(Tween.EASE_IN_OUT)
+	rod_tween.tween_property(%FishingRod, "scale:y", rod_base_scale.y, return_time).set_ease(Tween.EASE_IN_OUT)
 # --- prompt helpers ---
 func _set_prompt(text: String, blink_speed: float = 0.0) -> void:
 	_stop_blink()
@@ -140,8 +165,6 @@ func _set_prompt(text: String, blink_speed: float = 0.0) -> void:
 		blink_tween = create_tween().set_loops()
 		blink_tween.tween_property(%CastPrompt, "modulate:a", 0.2, blink_speed)
 		blink_tween.tween_property(%CastPrompt, "modulate:a", 1.0, blink_speed)
-
-
 func _stop_blink() -> void:
 	if blink_tween:
 		blink_tween.kill()

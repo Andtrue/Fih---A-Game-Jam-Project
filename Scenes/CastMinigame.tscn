@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://vp6lskd4nqqi" path="res://Assets/Fishing Assets/Fishing Bar.png" id="4_rrjas"]
 [ext_resource type="AudioStream" uid="uid://bcit786cqha31" path="res://Assets/SFX/Nice 1.wav" id="7_vyk76"]
 [ext_resource type="AudioStream" uid="uid://bl7jr2vsoag0o" path="res://Assets/SFX/Perfect Cast.wav" id="8_k347l"]
+[ext_resource type="Texture2D" uid="uid://drtw8g1cgamnm" path="res://Assets/Fishing Assets/fishingrod.png" id="8_vyk76"]
 [ext_resource type="Texture2D" uid="uid://u763gcbywliw" path="res://Assets/Fishing Assets/Progress Frame.png" id="9_mcyfq"]
 [ext_resource type="Texture2D" uid="uid://daii35xgpjjav" path="res://Assets/Fishing Assets/Progress Bar.png" id="10_l5vv2"]
 
@@ -99,3 +100,10 @@ offset_transform_scale = Vector2(0.145, 0.145)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 85
 text = "0 Fih"
+
+[node name="FishingRod" type="Sprite2D" parent="." unique_id=1866475261]
+unique_name_in_owner = true
+position = Vector2(67.600006, 75.999985)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("8_vyk76")
+offset = Vector2(-200, -600)
