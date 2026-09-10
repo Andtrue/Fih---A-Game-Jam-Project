@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dkqlgwllcrsov" path="res://Assets/Start Screen/Temp background.png" id="1_aire5"]
 [ext_resource type="Script" uid="uid://cor2wyemwu42h" path="res://Scenes/main_menu.gd" id="1_r7rhf"]
+[ext_resource type="FontFile" uid="uid://hrj82aheptd3" path="res://Assets/Font/Handlee-Regular.ttf" id="3_ur25d"]
 
 [node name="MainMenu" type="Node2D" unique_id=184303805]
 script = ExtResource("1_r7rhf")
@@ -18,5 +19,19 @@ offset_right = 923.0
 offset_bottom = 410.0
 theme_override_font_sizes/font_size = 58
 text = "Start"
+
+[node name="Label" type="Label" parent="." unique_id=1260534933]
+offset_left = 5.0
+offset_top = 554.0
+offset_right = 509.0
+offset_bottom = 783.0
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_constants/line_spacing = -15
+theme_override_fonts/font = ExtResource("3_ur25d")
+theme_override_font_sizes/font_size = 40
+text = "James - Artist
+Michael - Programmer, Fih'ing
+William - Programmer, Fih
+Andrew - Programmer, Music Man"
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
